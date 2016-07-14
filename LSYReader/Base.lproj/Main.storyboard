@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBD-86-EJT">
+                                <rect key="frame" x="20" y="28" width="560" height="65"/>
+                                <color key="backgroundColor" red="0.66438872868157561" green="0.77749971291950137" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="Mib-Pq-lZZ"/>
+                                </constraints>
+                                <state key="normal" title="Begin txt Read">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="begin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xZ8-YQ-BKZ"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LWz-nr-1SF">
+                                <rect key="frame" x="290" y="51" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="9nL-4D-biV"/>
+                                    <constraint firstAttribute="height" constant="20" id="sjI-zE-co1"/>
+                                </constraints>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWr-Zc-5gW">
+                                <rect key="frame" x="20" y="114" width="560" height="65"/>
+                                <color key="backgroundColor" red="0.66438872869999999" green="0.77749971289999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="0Tf-uJ-19r"/>
+                                    <constraint firstAttribute="height" constant="65" id="cdE-VT-Z9j"/>
+                                </constraints>
+                                <state key="normal" title="Begin ePub Read">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="beginEPub:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y0e-rG-fJe"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TR4-K5-05E">
+                                <rect key="frame" x="290" y="137" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="pdh-4n-NBR"/>
+                                    <constraint firstAttribute="width" constant="20" id="qaG-0N-Yfl"/>
+                                    <constraint firstAttribute="height" constant="20" id="yKw-OH-VV5"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="yqK-T1-JvR"/>
+                                </constraints>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKt-tT-puy">
+                                <rect key="frame" x="20" y="206" width="560" height="65"/>
+                                <color key="backgroundColor" red="0.66438872869999999" green="0.77749971289999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="hRB-Ba-EZk"/>
+                                </constraints>
+                                <state key="normal" title="Begin PDF Read">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="beginPDF:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Vy-0I-Y4z"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5hK-yU-vXD" userLabel="PDF Activity">
+                                <rect key="frame" x="290" y="229" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="XKU-jW-n1y"/>
+                                    <constraint firstAttribute="width" constant="20" id="gk0-na-u94"/>
+                                </constraints>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="2Yb-bE-oHk"/>
+                            <constraint firstAttribute="trailing" secondItem="OKt-tT-puy" secondAttribute="trailing" constant="15" id="4VW-cU-OyB"/>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="5Sj-x5-EAj"/>
+                            <constraint firstItem="TR4-K5-05E" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6MX-mH-shM"/>
+                            <constraint firstItem="tWr-Zc-5gW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="6vM-1A-TOw"/>
+                            <constraint firstItem="5hK-yU-vXD" firstAttribute="top" secondItem="tWr-Zc-5gW" secondAttribute="bottom" constant="50" id="7WS-lK-DcK"/>
+                            <constraint firstAttribute="trailing" secondItem="OKt-tT-puy" secondAttribute="trailing" constant="20" id="7wv-7l-QAx"/>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="8qw-Bj-PWv"/>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="EaM-9P-khl"/>
+                            <constraint firstItem="kBD-86-EJT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Elo-I7-R87"/>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="trailing" secondItem="tWr-Zc-5gW" secondAttribute="trailing" id="KsQ-h8-kbw"/>
+                            <constraint firstAttribute="trailing" secondItem="OKt-tT-puy" secondAttribute="trailing" constant="15" id="L5F-zk-Krl"/>
+                            <constraint firstItem="tWr-Zc-5gW" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="LVH-Zt-4A1"/>
+                            <constraint firstItem="LWz-nr-1SF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MY1-Qd-Pu9"/>
+                            <constraint firstItem="kBD-86-EJT" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="U96-wL-yqo"/>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="top" secondItem="tWr-Zc-5gW" secondAttribute="bottom" constant="27" id="WO1-6b-RSV"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OKt-tT-puy" secondAttribute="bottom" constant="329" id="ahy-Vz-a3i"/>
+                            <constraint firstItem="LWz-nr-1SF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="31" id="ayR-Nu-wOz"/>
+                            <constraint firstItem="TR4-K5-05E" firstAttribute="top" secondItem="kBD-86-EJT" secondAttribute="bottom" constant="44" id="fkG-rI-Qp3"/>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="leading" secondItem="tWr-Zc-5gW" secondAttribute="leading" id="j6P-2u-olg"/>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="jYd-0u-wms"/>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="n2k-pE-vSZ"/>
+                            <constraint firstAttribute="trailing" secondItem="OKt-tT-puy" secondAttribute="trailing" constant="20" id="nBc-1y-P1O"/>
+                            <constraint firstItem="kBD-86-EJT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="qFK-gg-bXe"/>
+                            <constraint firstItem="5hK-yU-vXD" firstAttribute="leading" secondItem="TR4-K5-05E" secondAttribute="leading" id="qIi-rL-YLR"/>
+                            <constraint firstItem="OKt-tT-puy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="s7k-3R-8DF"/>
+                            <constraint firstItem="tWr-Zc-5gW" firstAttribute="top" secondItem="kBD-86-EJT" secondAttribute="bottom" constant="21" id="yNg-Xl-J7B"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2Yb-bE-oHk"/>
+                                <exclude reference="4VW-cU-OyB"/>
+                                <exclude reference="5Sj-x5-EAj"/>
+                                <exclude reference="7wv-7l-QAx"/>
+                                <exclude reference="8qw-Bj-PWv"/>
+                                <exclude reference="EaM-9P-khl"/>
+                                <exclude reference="L5F-zk-Krl"/>
+                                <exclude reference="jYd-0u-wms"/>
+                                <exclude reference="n2k-pE-vSZ"/>
+                                <exclude reference="nBc-1y-P1O"/>
+                                <exclude reference="s7k-3R-8DF"/>
+                                <exclude reference="ahy-Vz-a3i"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="PDFActivity" destination="5hK-yU-vXD" id="a5E-ZP-Rjv"/>
+                        <outlet property="activity" destination="LWz-nr-1SF" id="PjH-Ry-1OF"/>
+                        <outlet property="begin" destination="kBD-86-EJT" id="XFI-de-hAf"/>
+                        <outlet property="beginEpub" destination="tWr-Zc-5gW" id="fO3-Jc-zPJ"/>
+                        <outlet property="beginPDF" destination="OKt-tT-puy" id="R0i-Bn-lIO"/>
+                        <outlet property="epubActivity" destination="TR4-K5-05E" id="gS7-1R-7cL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18" y="223"/>
+        </scene>
+    </scenes>
+</document>
