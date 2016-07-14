@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface MainViewController : UIViewController
 -(void)beginTXT;
 -(void)beginEpub;

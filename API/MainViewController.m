@@ -15,14 +15,18 @@
 #import "LSYReadUtilites.h"
 #import "LSYReadModel.h"
 #import "ZPDFReaderController.h"
+#import "LXReorderableCollectionViewFlowLayout.h"
+
+
 #define DF_WIDTH self.view.frame.size.width
 #define DF_HEIGHT self.view.frame.size.height
+#define LX_LIMITED_MOVEMENT 0
 
 static NSInteger padding = 10;
 static NSInteger count = 3; // 每行三个
 static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
 
-@interface MainViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface MainViewController ()<LXReorderableCollectionViewDataSource, LXReorderableCollectionViewDelegateFlowLayout>
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray *dataArray;
 @end
@@ -66,8 +70,8 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // collectionView 布局
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    // collectionView 布局，这里UICollectionViewFlowLayout被LXReorderableCollectionViewFlowLayout代替，让书具有移动，重排序的功能：https://github.com/lxcid/LXReorderableCollectionViewFlowLayout
+    LXReorderableCollectionViewFlowLayout *flowLayout = [[LXReorderableCollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.minimumLineSpacing = 50;//行距
     flowLayout.minimumInteritemSpacing = 1;
@@ -152,6 +156,74 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
     return padding;
 }
+
+
+#pragma mark - LXReorderableCollectionViewDataSource methods
+
+- (void)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath willMoveToIndexPath:(NSIndexPath *)toIndexPath {
+    BookModel *bookModel = self.dataArray[fromIndexPath.item];
+    
+    [self.dataArray removeObjectAtIndex:fromIndexPath.item];
+    [self.dataArray insertObject:bookModel atIndex:toIndexPath.item];
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+//#if LX_LIMITED_MOVEMENT == 1
+//    PlayingCard *playingCard = self.deck[indexPath.item];
+//    
+//    switch (playingCard.suit) {
+//        case PlayingCardSuitSpade:
+//        case PlayingCardSuitClub: {
+//            return YES;
+//        } break;
+//        default: {
+//            return NO;
+//        } break;
+//    }
+//#else
+//    return YES;
+//#endif
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView itemAtIndexPath:(NSIndexPath *)fromIndexPath canMoveToIndexPath:(NSIndexPath *)toIndexPath {
+    return YES;
+//#if LX_LIMITED_MOVEMENT == 1
+//    PlayingCard *fromPlayingCard = self.deck[fromIndexPath.item];
+//    PlayingCard *toPlayingCard = self.deck[toIndexPath.item];
+//    
+//    switch (toPlayingCard.suit) {
+//        case PlayingCardSuitSpade:
+//        case PlayingCardSuitClub: {
+//            return fromPlayingCard.rank == toPlayingCard.rank;
+//        } break;
+//        default: {
+//            return NO;
+//        } break;
+//    }
+//#else
+//    return YES;
+//#endif
+}
+
+#pragma mark - LXReorderableCollectionViewDelegateFlowLayout methods
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"will begin drag");
+}
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didBeginDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"did begin drag");
+}
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout willEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"will end drag");
+}
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout didEndDraggingItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"did end drag");
+}
+
 
 - (void) beginTXT:(BookModel*)bookModel {
     LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];

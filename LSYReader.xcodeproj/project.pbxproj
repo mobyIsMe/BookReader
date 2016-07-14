@@ -24,6 +24,7 @@
 		515501E31D2CED42009E267F /* shelf.png in Resources */ = {isa = PBXBuildFile; fileRef = 515501E01D2CED42009E267F /* shelf.png */; };
 		515503431D2FD8A1009E267F /* AboutTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503411D2FD8A1009E267F /* AboutTabBar.m */; };
 		515503441D2FD8A1009E267F /* BookStoreTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503421D2FD8A1009E267F /* BookStoreTabBar.m */; };
+		515F20C51D3770E1008FDFD9 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 515F20C41D3770E1008FDFD9 /* LXReorderableCollectionViewFlowLayout.m */; };
 		517331BC1D363198009089DE /* BookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331B71D363198009089DE /* BookModel.m */; };
 		517331BD1D363198009089DE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331B91D363198009089DE /* MainViewController.m */; };
 		517331BE1D363198009089DE /* ReadCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331BB1D363198009089DE /* ReadCollectionCell.m */; };
@@ -118,8 +119,10 @@
 		515501E01D2CED42009E267F /* shelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf.png; sourceTree = "<group>"; };
 		5155033F1D2FD833009E267F /* AboutTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTabBar.h; sourceTree = "<group>"; };
 		515503401D2FD86C009E267F /* BookStoreTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookStoreTabBar.h; sourceTree = "<group>"; };
-		515503411D2FD8A1009E267F /* AboutTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTabBar.m; sourceTree = "<group>"; };
-		515503421D2FD8A1009E267F /* BookStoreTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookStoreTabBar.m; sourceTree = "<group>"; };
+		515503411D2FD8A1009E267F /* AboutTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutTabBar.m; path = ../Third/AboutTabBar.m; sourceTree = "<group>"; };
+		515503421D2FD8A1009E267F /* BookStoreTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookStoreTabBar.m; path = ../Third/BookStoreTabBar.m; sourceTree = "<group>"; };
+		515F20C31D3770E1008FDFD9 /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LXReorderableCollectionViewFlowLayout.h; path = ../../LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		515F20C41D3770E1008FDFD9 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LXReorderableCollectionViewFlowLayout.m; path = ../../LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		517331B61D363198009089DE /* BookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookModel.h; sourceTree = "<group>"; };
 		517331B71D363198009089DE /* BookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookModel.m; sourceTree = "<group>"; };
 		517331B81D363198009089DE /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../API/MainViewController.h; sourceTree = "<group>"; };
@@ -383,8 +386,8 @@
 		87D8BD281CFFE5100087D8DA /* Third */ = {
 			isa = PBXGroup;
 			children = (
-				515503411D2FD8A1009E267F /* AboutTabBar.m */,
-				515503421D2FD8A1009E267F /* BookStoreTabBar.m */,
+				515F20C31D3770E1008FDFD9 /* LXReorderableCollectionViewFlowLayout.h */,
+				515F20C41D3770E1008FDFD9 /* LXReorderableCollectionViewFlowLayout.m */,
 				871E61BD1D1282B80047AAFE /* ZipArchive */,
 				871E60E31D1252B20047AAFE /* TouchXML */,
 				AB9A96E51CFD25190066030C /* LSYReadUtilites.h */,
@@ -520,6 +523,8 @@
 		ABE8ABD41CFEBAD400693078 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				515503411D2FD8A1009E267F /* AboutTabBar.m */,
+				515503421D2FD8A1009E267F /* BookStoreTabBar.m */,
 				ABE8ABD51CFEBB2400693078 /* LSYMenuView.h */,
 				ABE8ABD61CFEBB2400693078 /* LSYMenuView.m */,
 				ABE8ABD81CFEBB7600693078 /* LSYTopMenuView.h */,
@@ -668,6 +673,7 @@
 				ABE8ABDD1CFEBB8300693078 /* LSYBottomMenuView.m in Sources */,
 				AB9A96D41CFC2F480066030C /* LSYReadPageViewController.m in Sources */,
 				515501DD1D2CEC65009E267F /* Demo1ViewController.m in Sources */,
+				515F20C51D3770E1008FDFD9 /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				517331BC1D363198009089DE /* BookModel.m in Sources */,
 				515501DC1D2CEC65009E267F /* UIView+GMGridViewAdditions.m in Sources */,
 				871E61081D1252B20047AAFE /* CXMLDocument_PrivateExtensions.m in Sources */,
