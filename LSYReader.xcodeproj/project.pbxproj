@@ -28,7 +28,7 @@
 		517331BD1D363198009089DE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331B91D363198009089DE /* MainViewController.m */; };
 		517331BE1D363198009089DE /* ReadCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331BB1D363198009089DE /* ReadCollectionCell.m */; };
 		517331C21D3670B5009089DE /* 细说明朝.epub in Resources */ = {isa = PBXBuildFile; fileRef = 517331BF1D3670B5009089DE /* 细说明朝.epub */; };
-		517331C31D3670B5009089DE /* mdjyml.txt in Resources */ = {isa = PBXBuildFile; fileRef = 517331C01D3670B5009089DE /* mdjyml.txt */; };
+		517331C31D3670B5009089DE /* 民调局异闻录.txt in Resources */ = {isa = PBXBuildFile; fileRef = 517331C01D3670B5009089DE /* 民调局异闻录.txt */; };
 		517331C41D3670B5009089DE /* Pride and Prejudice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 517331C11D3670B5009089DE /* Pride and Prejudice.pdf */; };
 		871E61041D1252B20047AAFE /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 871E60E71D1252B20047AAFE /* CXMLDocument_CreationExtensions.m */; };
 		871E61051D1252B20047AAFE /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 871E60E91D1252B20047AAFE /* CXMLNode_CreationExtensions.m */; };
@@ -127,7 +127,7 @@
 		517331BA1D363198009089DE /* ReadCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadCollectionCell.h; sourceTree = "<group>"; };
 		517331BB1D363198009089DE /* ReadCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadCollectionCell.m; sourceTree = "<group>"; };
 		517331BF1D3670B5009089DE /* 细说明朝.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = "细说明朝.epub"; path = "../../files/细说明朝.epub"; sourceTree = "<group>"; };
-		517331C01D3670B5009089DE /* mdjyml.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mdjyml.txt; path = ../../files/mdjyml.txt; sourceTree = "<group>"; };
+		517331C01D3670B5009089DE /* 民调局异闻录.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "民调局异闻录.txt"; path = "../../files/民调局异闻录.txt"; sourceTree = "<group>"; };
 		517331C11D3670B5009089DE /* Pride and Prejudice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Pride and Prejudice.pdf"; path = "../../files/Pride and Prejudice.pdf"; sourceTree = "<group>"; };
 		871E60E61D1252B20047AAFE /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
 		871E60E71D1252B20047AAFE /* CXMLDocument_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_CreationExtensions.m; sourceTree = "<group>"; };
@@ -543,7 +543,7 @@
 				ABE8ABDF1CFED88300693078 /* bg_back_white.png */,
 				ABE8ABE01CFED88300693078 /* bg_back_white@2x.png */,
 				517331BF1D3670B5009089DE /* 细说明朝.epub */,
-				517331C01D3670B5009089DE /* mdjyml.txt */,
+				517331C01D3670B5009089DE /* 民调局异闻录.txt */,
 				517331C11D3670B5009089DE /* Pride and Prejudice.pdf */,
 				87D8BD231CFFDB2E0087D8DA /* reader_cover@2x.png */,
 				ABE8ABE61D02A99300693078 /* r_drag-dot@2x.png */,
@@ -615,7 +615,7 @@
 				5106EF341D23A0A000C33C11 /* files in Resources */,
 				5106EF451D24C8A600C33C11 /* back_nav@2x.png in Resources */,
 				515501E21D2CED42009E267F /* close_x.png in Resources */,
-				517331C31D3670B5009089DE /* mdjyml.txt in Resources */,
+				517331C31D3670B5009089DE /* 民调局异闻录.txt in Resources */,
 				515501E31D2CED42009E267F /* shelf.png in Resources */,
 				517331C21D3670B5009089DE /* 细说明朝.epub in Resources */,
 				515501E11D2CED42009E267F /* book.png in Resources */,

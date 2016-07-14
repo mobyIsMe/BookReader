@@ -195,10 +195,11 @@
     //epub文件的封面路径：coverImgPathStr
     coverImgPathStr = [@"/" stringByAppendingString:coverImgPathStr];
     coverImgPathStr = [absolutePath stringByAppendingString:coverImgPathStr];
-    //先存到本地的NSUserDefaults,key是epub的文件名
-    [[NSUserDefaults standardUserDefaults] setObject:coverImgPathStr forKey:[[absolutePath stringByDeletingLastPathComponent]lastPathComponent]];
+    NSString* coverImgName = [[absolutePath stringByDeletingLastPathComponent]lastPathComponent];
     //拼接封面图片的绝对路径，得到封面图片：coverImg
-//    UIImage *coverImg = [UIImage imageWithContentsOfFile:[absolutePath stringByAppendingString:coverImgPathStr]];
+    UIImage *coverImg = [UIImage imageWithContentsOfFile:coverImgPathStr];
+    //存储图片到本地
+    [self storeImgLocal:coverImg withImageName:coverImgName];
     
     CXMLDocument *ncxDoc = [[CXMLDocument alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", absolutePath,ncxFile]] options:0 error:nil];
     NSMutableDictionary* titleDictionary = [[NSMutableDictionary alloc] init];
@@ -222,5 +223,27 @@
         
     }
     return chapters;
+}
+
++(bool)storeImgLocal:(UIImage*)imgToStore withImageName:(NSString*)imageName{
+    //NSData *imageData = UIImagePNGRepresentation(imgToStore);
+    NSData *pngData = UIImagePNGRepresentation(imgToStore); // Convert it in to PNG data
+    //UIImage *pngImage = [UIImage imageWithData:pngData]; // Result image
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"cover_%@.png",imageName]];
+    NSLog((@"pre writing to file"));
+    if (![pngData writeToFile:imagePath atomically:NO])
+    {
+        NSLog(@"Failed to cache image data to disk");
+        return NO;
+    }
+    else
+    {
+        NSLog(@"the cachedImagedPath is %@", imagePath);
+        return YES;
+    }
+    
 }
 @end

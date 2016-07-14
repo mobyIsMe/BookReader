@@ -41,12 +41,13 @@
 {
     [super layoutSubviews];
     
-    CGFloat titleHeight = 20;
+    CGFloat titleHeight = 40;
+    CGFloat txtSignHeight  = 30;
     
-    self.imageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-titleHeight);
+    self.imageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-20);
     self.bookNameLabel.frame = CGRectMake(self.imageView.frame.origin.x, CGRectGetMaxY(self.imageView.frame), CGRectGetWidth(self.frame), titleHeight);
-    self.txtBookName.frame = CGRectMake(self.imageView.frame.origin.x, CGRectGetMaxY(self.imageView.frame)/4, CGRectGetWidth(self.frame), titleHeight);
-    self.txtSign.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame)-titleHeight, CGRectGetWidth(self.frame), titleHeight);
+    self.txtBookName.frame = CGRectMake(self.imageView.frame.origin.x, CGRectGetMaxY(self.imageView.frame)/4, CGRectGetWidth(self.frame), 20);
+    self.txtSign.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame)-txtSignHeight, CGRectGetWidth(self.frame),txtSignHeight);
     
 
 }
@@ -64,25 +65,35 @@
     }else if (model.bookType==BookTypeTXT){
         self.imageView.backgroundColor = [UIColor colorWithRed:50/255.0 green:155/255.0 blue:213/255.0 alpha:1.0];
         self.txtSign.text = @"TXT";
-        self.txtBookName.text = model.bookName;
+        
     }else{
-        //解压epub文件
-        [LSYReadModel getLocalModelWithURL:[[NSBundle mainBundle] URLForResource:model.bookName withExtension:@"epub"]];
-        coverimg = [UIImage imageWithContentsOfFile:[[NSUserDefaults standardUserDefaults]stringForKey:model.bookName]];
+        coverimg = [UIImage imageWithContentsOfFile:model.cover];
+        if(coverimg==nil){//如果没有封面，就解压文件
+            //解压epub文件
+            [LSYReadModel getLocalModelWithURL:[[NSBundle mainBundle] URLForResource:model.bookName withExtension:@"epub"]];
+            coverimg = [UIImage imageWithContentsOfFile:[[NSUserDefaults standardUserDefaults]stringForKey:model.bookName]];
+        }
+        //如果解压目录下没有封面
         if(coverimg==nil){
             self.imageView.backgroundColor = [UIColor colorWithRed:20/255.0 green:155/255.0 blue:213/255.0 alpha:1.0];
             self.txtSign.text = @"EPUB";
-            self.txtBookName.text = model.bookName;
+            
         }
     }
     //添加边框
     self.imageView.image = coverimg;
     [self.imageView.layer setBorderColor: [[UIColor blackColor] CGColor]];
     [self.imageView.layer setBorderWidth: 1.0];
+    self.txtBookName.text = model.bookName;
+    self.txtBookName.font = [UIFont systemFontOfSize:10.0];
     self.bookNameLabel.text = model.bookName;
-    
-    
+    self.bookNameLabel.font = [UIFont systemFontOfSize:15.0];
+    self.bookNameLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.bookNameLabel.numberOfLines = 0;
+    [self.bookNameLabel sizeToFit];
     self.txtSign.textColor = [UIColor whiteColor];
+    self.txtSign.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:30];
+
 //    这里只是说明BookType 用途，按正常的应该是解压epub 格式或者初始化pdf 之后 截图保存本地，然后把对应的封面存到数据，取值的时候直接使用 cover 这个属性
 }
 

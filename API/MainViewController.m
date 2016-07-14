@@ -42,7 +42,7 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
         for (int i=0; i<fileNameLists.count; i++) {
             NSString *fileItem = [fileNameLists objectAtIndex:i];
             BookModel *bookModel = [[BookModel alloc] init];
-            bookModel.cover = @"cover.png";
+            //bookModel.cover = @"cover.png";
             bookModel.bookName = [fileItem stringByDeletingPathExtension];
             bookModel.filePath = [[NSBundle mainBundle] pathForResource:bookModel.bookName
                                                                  ofType:[fileItem pathExtension]];
@@ -51,6 +51,9 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
                 bookModel.bookType = BookTypePDF;
             }else if([[fileItem pathExtension]isEqualToString:@"epub"]){
                 bookModel.bookType = BookTypeEPUB;
+                NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString *documentsDirectory = [paths objectAtIndex:0];
+                bookModel.cover =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"cover_%@.png",bookModel.bookName]];
             }else {
                 bookModel.bookType = BookTypeTXT;
             }
@@ -77,6 +80,7 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
     self.collectionView.dataSource = self;
     [self.collectionView registerClass:[ReadCollectionCell class] forCellWithReuseIdentifier:kCollectionCellIdentifier];
     [self.view addSubview:self.collectionView];
+    [self.collectionView reloadData];
 
 }
 
