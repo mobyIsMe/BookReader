@@ -12,7 +12,7 @@
     CGPDFDocumentRef pdfDocument;
     int pageNO;
 }
-@property (nonatomic, strong, readonly) NSArray *items;
+@property (nonatomic, strong) NSArray *items;
 @property (nonatomic,copy) NSString *content;
 @property (nonatomic,strong) NSMutableArray <LSYMarkModel *>*marks;
 @property (nonatomic,strong) NSMutableArray <LSYNoteModel *>*notes;
