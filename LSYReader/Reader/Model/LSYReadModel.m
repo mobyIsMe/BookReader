@@ -17,7 +17,7 @@
     if (self) {
         _content = content;
         NSMutableArray *charpter = [NSMutableArray array];
-        [LSYReadUtilites separateChapter:&charpter content:content];
+        [LSYReadUtilites separateChapter:&charpter content:content];//TXT文件可以直接提取章节
         _chapters = charpter;
         _notes = [NSMutableArray array];
         _marks = [NSMutableArray array];
@@ -45,7 +45,7 @@
 -(instancetype)initWithPDF:(NSString*)pdfPath{
     self = [super init];
     if (self) {
-        _chapters = [LSYReadUtilites ePubFileHandle:pdfPath];;
+        _chapters = [LSYReadUtilites pdfFileHandle:pdfPath];;
         _notes = [NSMutableArray array];
         _marks = [NSMutableArray array];
         _record = [[LSYRecordModel alloc] init];

@@ -10,10 +10,11 @@
 #import <CoreText/CoreText.h>
 
 @interface LSYChapterModel : NSObject<NSCopying,NSCoding>
-@property (nonatomic,strong) NSString *content;
-@property (nonatomic,strong) NSString *title;
-@property (nonatomic) NSUInteger pageCount;
+@property (nonatomic,strong) NSString *content;//目录
+@property (nonatomic,strong) NSString *title;//标题：chapter1
+@property (nonatomic) NSUInteger pageCount;//页码
 -(NSString *)stringOfPage:(NSUInteger)index;
 -(void)updateFont;
 +(id)chapterWithEpub:(NSString *)chapterpath title:(NSString *)title;
++(id)chapterWithPdf:(NSString *)chapterTitle WithPageCount:(NSUInteger)pageNum;
 @end

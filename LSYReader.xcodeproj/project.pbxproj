@@ -24,6 +24,9 @@
 		515501E31D2CED42009E267F /* shelf.png in Resources */ = {isa = PBXBuildFile; fileRef = 515501E01D2CED42009E267F /* shelf.png */; };
 		515503431D2FD8A1009E267F /* AboutTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503411D2FD8A1009E267F /* AboutTabBar.m */; };
 		515503441D2FD8A1009E267F /* BookStoreTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503421D2FD8A1009E267F /* BookStoreTabBar.m */; };
+		515F20C81D3904DB008FDFD9 /* PDFDocumentOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 515F20C71D3904DB008FDFD9 /* PDFDocumentOutline.m */; };
+		515F20CB1D3905EE008FDFD9 /* PDFDocumentOutlineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 515F20CA1D3905EE008FDFD9 /* PDFDocumentOutlineItem.m */; };
+		515F20CE1D390645008FDFD9 /* NSArray+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 515F20CD1D390645008FDFD9 /* NSArray+GreatReaderAdditions.m */; };
 		517331BC1D363198009089DE /* BookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331B71D363198009089DE /* BookModel.m */; };
 		517331BD1D363198009089DE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331B91D363198009089DE /* MainViewController.m */; };
 		517331BE1D363198009089DE /* ReadCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331BB1D363198009089DE /* ReadCollectionCell.m */; };
@@ -120,6 +123,12 @@
 		515503401D2FD86C009E267F /* BookStoreTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookStoreTabBar.h; sourceTree = "<group>"; };
 		515503411D2FD8A1009E267F /* AboutTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTabBar.m; sourceTree = "<group>"; };
 		515503421D2FD8A1009E267F /* BookStoreTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookStoreTabBar.m; sourceTree = "<group>"; };
+		515F20C61D3904DB008FDFD9 /* PDFDocumentOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentOutline.h; sourceTree = "<group>"; };
+		515F20C71D3904DB008FDFD9 /* PDFDocumentOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentOutline.m; sourceTree = "<group>"; };
+		515F20C91D3905EE008FDFD9 /* PDFDocumentOutlineItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentOutlineItem.h; sourceTree = "<group>"; };
+		515F20CA1D3905EE008FDFD9 /* PDFDocumentOutlineItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentOutlineItem.m; sourceTree = "<group>"; };
+		515F20CC1D390645008FDFD9 /* NSArray+GreatReaderAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GreatReaderAdditions.h"; sourceTree = "<group>"; };
+		515F20CD1D390645008FDFD9 /* NSArray+GreatReaderAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GreatReaderAdditions.m"; sourceTree = "<group>"; };
 		517331B61D363198009089DE /* BookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookModel.h; sourceTree = "<group>"; };
 		517331B71D363198009089DE /* BookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookModel.m; sourceTree = "<group>"; };
 		517331B81D363198009089DE /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../API/MainViewController.h; sourceTree = "<group>"; };
@@ -251,6 +260,12 @@
 		5106EF351D23CAE700C33C11 /* ZPDFReader */ = {
 			isa = PBXGroup;
 			children = (
+				515F20C61D3904DB008FDFD9 /* PDFDocumentOutline.h */,
+				515F20C71D3904DB008FDFD9 /* PDFDocumentOutline.m */,
+				515F20CC1D390645008FDFD9 /* NSArray+GreatReaderAdditions.h */,
+				515F20CD1D390645008FDFD9 /* NSArray+GreatReaderAdditions.m */,
+				515F20C91D3905EE008FDFD9 /* PDFDocumentOutlineItem.h */,
+				515F20CA1D3905EE008FDFD9 /* PDFDocumentOutlineItem.m */,
 				5106EF361D23CB0400C33C11 /* ZPDFPageController.h */,
 				5106EF371D23CB0400C33C11 /* ZPDFPageController.m */,
 				5106EF381D23CB0400C33C11 /* ZPDFPageModel.h */,
@@ -654,6 +669,7 @@
 				871E610C1D1252B20047AAFE /* CXMLNamespaceNode.m in Sources */,
 				87D8BD3E1D0013ED0087D8DA /* LSYMarkVC.m in Sources */,
 				87D8BD2E1CFFE5880087D8DA /* LSYCatalogViewController.m in Sources */,
+				515F20C81D3904DB008FDFD9 /* PDFDocumentOutline.m in Sources */,
 				871E610F1D1252B20047AAFE /* CXMLNode_XPathExtensions.m in Sources */,
 				871E61D31D12A6040047AAFE /* NSString+HTML.m in Sources */,
 				AB9A96F11CFD27ED0066030C /* LSYNoteModel.m in Sources */,
@@ -682,7 +698,9 @@
 				871E61061D1252B20047AAFE /* CXHTMLDocument.m in Sources */,
 				871E61101D1252B20047AAFE /* CXMLUnsupportedNode.m in Sources */,
 				871E61071D1252B20047AAFE /* CXMLDocument.m in Sources */,
+				515F20CB1D3905EE008FDFD9 /* PDFDocumentOutlineItem.m in Sources */,
 				517331BD1D363198009089DE /* MainViewController.m in Sources */,
+				515F20CE1D390645008FDFD9 /* NSArray+GreatReaderAdditions.m in Sources */,
 				AB9A96EB1CFD27C70066030C /* LSYReadModel.m in Sources */,
 				AB905C751D0D1BC400F3B2C9 /* LSYMagnifierView.m in Sources */,
 				AB9A96E71CFD25190066030C /* LSYReadUtilites.m in Sources */,

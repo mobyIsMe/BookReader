@@ -7,7 +7,8 @@
 //
 
 #import "ZPDFView.h"
-
+#import "PDFDocumentOutline.h"
+#import "LSYChapterModel.h"
 @implementation ZPDFView
 
 -(id)initWithFrame:(CGRect)frame atPage:(int)index withPDFDoc:(CGPDFDocumentRef) pdfDoc{
@@ -15,10 +16,29 @@
     if(self){
         pageNO = index;
         pdfDocument = pdfDoc;
+       //获取目录字典
+        _items = [[PDFDocumentOutline alloc]initWithCGPDFDocument:pdfDoc];
+        NSMutableArray *charpter = [NSMutableArray array];
+
+        _chapters = charpter;
+        _notes = [NSMutableArray array];
+        _marks = [NSMutableArray array];
+        _record = [[LSYRecordModel alloc] init];
+        _record.chapterModel = charpter.firstObject;
+        _record.chapterCount = _chapters.count;
     }
     return self;
 }
 
+-(NSMutableArray*)initChapters:(NSArray*)_chapters{
+    for (PDFDocumentOutlineItem* element in _chapters){
+        LSYChapterModel *model = [LSYChapterModel chapterWithPdf:element.title WithPageCount:element.pageNO];
+        [chapters addObject:model];
+        
+    }
+    return chapters;
+}
+    
 -(void)drawInContext:(CGContextRef)context atPageNo:(int)page_no{
     // PDF page drawing expects a Lower-Left coordinate system, so we flip the coordinate system
     // before we start drawing.

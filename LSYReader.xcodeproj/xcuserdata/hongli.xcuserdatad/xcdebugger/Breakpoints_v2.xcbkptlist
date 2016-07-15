@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490072705.194073"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "+unZip:"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490072705.194073"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "+OPFPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490072705.194073"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "+parseOPF:"
             landmarkType = "5">
          </BreakpointContent>
@@ -589,7 +589,7 @@
                   moduleName = "LSYReader"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hongli/Desktop/ok/BookReader/Demo1ViewController.m"
-                  timestampString = "490167859.669524"
+                  timestampString = "490278179.607115"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "265"
@@ -604,7 +604,7 @@
                   moduleName = "LSYReader"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hongli/Desktop/ok/BookReader/Demo1ViewController.m"
-                  timestampString = "490167859.669694"
+                  timestampString = "490278179.607226"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "265"
@@ -669,11 +669,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490089710.809317"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "+parseOPF:"
             landmarkType = "5">
          </BreakpointContent>
@@ -685,11 +685,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490159021.009162"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "+storeImgLocal:withImageName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -701,11 +701,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490072705.194073"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "+parseOPF:"
             landmarkType = "5">
          </BreakpointContent>
@@ -797,11 +797,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490159021.009162"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "+parseOPF:"
             landmarkType = "5">
          </BreakpointContent>
@@ -909,11 +909,11 @@
                   moduleName = "LSYReader"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hongli/Desktop/ok/BookReader/API/ReadCollectionCell.m"
-                  timestampString = "490167859.679796"
+                  timestampString = "490278179.617288"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
                   offsetFromSymbolStart = "450">
                </Location>
                <Location
@@ -924,11 +924,11 @@
                   moduleName = "LSYReader"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/hongli/Desktop/ok/BookReader/API/ReadCollectionCell.m"
-                  timestampString = "490167859.679927"
+                  timestampString = "490278179.617397"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
                   offsetFromSymbolStart = "458">
                </Location>
             </Locations>
@@ -1069,11 +1069,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490161022.779759"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "+storeImgLocal:withImageName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1085,11 +1085,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490159021.009162"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "+parseOPF:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1117,11 +1117,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490159247.248639"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "+storeImgLocal:withImageName:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1133,12 +1133,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LSYReader/Reader/Core/LSYReadUtilites.m"
-            timestampString = "490161022.779759"
+            timestampString = "490273065.072629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "+storeImgLocal:withImageName:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LSYReader/ZPDFReader/ZPDFView.m"
+            timestampString = "490278173.26497"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "-initWithFrame:atPage:withPDFDoc:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LSYReader/ZPDFReader/ZPDFView.m"
+            timestampString = "490278173.26497"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "-initWithFrame:atPage:withPDFDoc:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LSYReader/ZPDFReader/ZPDFView.m"
+            timestampString = "490278189.786158"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "-initWithFrame:atPage:withPDFDoc:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LSYReader/ZPDFReader/ZPDFView.m"
+            timestampString = "490278190.53964"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "-initWithFrame:atPage:withPDFDoc:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

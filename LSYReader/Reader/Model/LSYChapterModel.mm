@@ -33,6 +33,14 @@
     model.content = [html stringByConvertingHTMLToPlainText];
     return model;
 }
+
++(id)chapterWithPdf:(NSString *)chapterTitle WithPageCount:(NSUInteger)pageNum{
+    LSYChapterModel *model = [[LSYChapterModel alloc] init];
+    model.title = chapterTitle;
+    model.content = @"";
+    model.pageCount = pageNum;
+    return model;
+}
 -(id)copyWithZone:(NSZone *)zone
 {
     LSYChapterModel *model = [[LSYChapterModel allocWithZone:zone] init];

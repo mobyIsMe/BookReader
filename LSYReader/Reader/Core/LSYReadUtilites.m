@@ -135,6 +135,13 @@
     return [self parseOPF:OPFPath];
     
 }
+#pragma mark - pdf处理
+//+(NSMutableArray*)pdfFileHandle:(NSString *)path;
+//{
+//   // return [CGPDFDocumentGetCatalog];
+//    
+//}
+
 #pragma mark - 解压文件路径
 +(NSString *)unZip:(NSString *)path
 {

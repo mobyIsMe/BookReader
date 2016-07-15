@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-/////是一样吗？
 
 @interface ZPDFView : UIView {
     CGPDFDocumentRef pdfDocument;
     int pageNO;
 }
-
+@property (nonatomic, strong, readonly) NSArray *items;
+@property (nonatomic,copy) NSString *content;
+@property (nonatomic,strong) NSMutableArray <LSYMarkModel *>*marks;
+@property (nonatomic,strong) NSMutableArray <LSYNoteModel *>*notes;
+@property (nonatomic,strong) NSMutableArray <LSYChapterModel *>*chapters;
+@property (nonatomic,strong) LSYRecordModel *record;
 -(id)initWithFrame:(CGRect)frame atPage:(int)index withPDFDoc:(CGPDFDocumentRef) pdfDoc;
-
 @end
