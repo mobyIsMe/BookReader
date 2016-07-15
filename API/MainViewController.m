@@ -66,6 +66,7 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"书架";
     // collectionView 布局
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
