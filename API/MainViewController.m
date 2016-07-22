@@ -159,7 +159,8 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
     NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"txt"];
     
     pageView.resourceURL = fileURL;    //文件位置
-    
+    pageView.isPDF = NO;
+
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         pageView.model = [LSYReadModel getLocalModelWithURL: pageView.resourceURL];
@@ -176,7 +177,7 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
     LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
     NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"epub"];
     pageView.resourceURL = fileURL;    //文件位置
-    
+    pageView.isPDF = NO;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         pageView.model = [LSYReadModel getLocalModelWithURL:pageView.resourceURL];
@@ -190,21 +191,37 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
 
 -(void)beginPDF:(BookModel*)bookModel{
     //开始跳转PDF阅读页
+//    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"pdf"];
+//    ZPDFReaderController *targetViewCtrl = [[ZPDFReaderController alloc] init];
+//    targetViewCtrl.fileName = [fileURL lastPathComponent];
+//    targetViewCtrl.subDirName=@"files";
+//    
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        
+//        //pageView.model = [LSYReadModel getLocalModelWithURL:fileURL];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            //暂时添加导航栏
+//            UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:targetViewCtrl];
+//            [self presentViewController:nav animated:YES completion:nil];
+//            
+//        });
+//    });
+    
+    LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
     NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"pdf"];
-    ZPDFReaderController *targetViewCtrl = [[ZPDFReaderController alloc] init];
-    targetViewCtrl.fileName = [fileURL lastPathComponent];
-    targetViewCtrl.subDirName=@"files";
+    pageView.resourceURL = fileURL;    //文件位置
+    pageView.fileName = [fileURL lastPathComponent];
+    pageView.subDirName=@"files";
+    pageView.isPDF = YES;
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-        //pageView.model = [LSYReadModel getLocalModelWithURL:fileURL];
+        pageView.model = [LSYReadModel getLocalModelWithURL:pageView.resourceURL];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            //暂时添加导航栏
-            UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:targetViewCtrl];
-            [self presentViewController:nav animated:YES completion:nil];
-            
+            [self presentViewController:pageView animated:YES completion:nil];
         });
     });
     

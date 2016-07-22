@@ -15,11 +15,11 @@
 
 @class ZPDFPageController;
 
-@interface ZPDFPageModel : NSObject <UIPageViewControllerDataSource>
+@interface ZPDFPageModel : LSYReadModel <UIPageViewControllerDataSource>
 {
     CGPDFDocumentRef pdfDocument;
 }
-
+@property (nonatomic, strong) NSArray *items;
 @property (nonatomic, assign) id<ZPDFPageModelDelegate>delegate;
 
 -(id) initWithPDFDocument:(CGPDFDocumentRef) pdfDocument;

@@ -8,16 +8,39 @@
 
 #import "ZPDFPageModel.h"
 #import "ZPDFPageController.h"
-
+#import "PDFDocumentOutline.h"
+#import "LSYChapterModel.h"
+#import "PDFDocumentOutlineItem.h"
 @implementation ZPDFPageModel
 
 -(id) initWithPDFDocument:(CGPDFDocumentRef) pdfDoc {
     self = [super init];
     if (self) {
         pdfDocument = pdfDoc;
+        //获取目录字典
+        _items = [[PDFDocumentOutline alloc]outlineItemsForDocument:pdfDocument];
+        super.chapters = [self getChapters:_items];
+       super.notes = [NSMutableArray array];
+       super.marks = [NSMutableArray array];
+        super.record = [[LSYRecordModel alloc] init];
+        super.record.chapterModel = super.chapters.firstObject;
+        super.record.chapterCount = super.chapters.count;
+
     }
     return self;
 }
+
+-(NSMutableArray*)getChapters:(NSArray*)chapterArray{
+    NSMutableArray* chapters = [[NSMutableArray alloc]init];
+    for (PDFDocumentOutlineItem* element in chapterArray){
+        LSYChapterModel *model = [LSYChapterModel chapterWithPdf:element.title WithPageCount:element.pageNumber];
+        [chapters addObject:model];
+        
+    }
+    
+    return chapters;
+}
+
 
 - (ZPDFPageController *)viewControllerAtIndex:(NSUInteger)pageNO {
     // Return the data view controller for the given index.

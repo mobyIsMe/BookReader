@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ZPDFPageController : UIViewController
+#import "LSYRecordModel.h"
+#import "LSYReadView.h"
+#import "LSYReadViewController.h"
+@interface ZPDFPageController : LSYReadViewController
 
 @property (assign, nonatomic) CGPDFDocumentRef pdfDocument;
 @property (assign, nonatomic) long pageNO;

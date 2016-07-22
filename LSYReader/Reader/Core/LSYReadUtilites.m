@@ -10,6 +10,8 @@
 //#import "LSYChapterModel.h"
 #import "ZipArchive.h"
 #import "TouchXML.h"
+#import "PDFDocumentOutline.h"
+#import "PDFDocumentOutlineItem.h"
 @implementation LSYReadUtilites
 +(void)separateChapter:(NSMutableArray **)chapters content:(NSString *)content
 {
@@ -138,9 +140,42 @@
 #pragma mark - pdf处理
 //+(NSMutableArray*)pdfFileHandle:(NSString *)path;
 //{
-//   // return [CGPDFDocumentGetCatalog];
+//    
+//    return [[PDFDocumentOutline alloc]outlineItemsForDocument:pdfDoc];
+//    _chapters = [self getChapters:_items];
+//    
 //    
 //}
+//-(id) initWithPDFDocument:(CGPDFDocumentRef) pdfDoc {
+//    self = [super init];
+//    if (self) {
+//        pdfDocument = pdfDoc;
+//        //获取目录字典
+//        _items = [[PDFDocumentOutline alloc]outlineItemsForDocument:pdfDocument];
+//        _chapters = [self getChapters:_items];
+//        _notes = [NSMutableArray array];
+//        _marks = [NSMutableArray array];
+//        _record = [[LSYRecordModel alloc] init];
+//        _record.chapterModel = _chapters.firstObject;
+//        _record.chapterCount = _chapters.count;
+//        
+//    }
+//    return self;
+//}
+
+-(NSMutableArray*)getChapters:(NSArray*)chapterArray{
+    NSMutableArray* chapters = [[NSMutableArray alloc]init];
+    for (PDFDocumentOutlineItem* element in chapterArray){
+        LSYChapterModel *model = [LSYChapterModel chapterWithPdf:element.title WithPageCount:element.pageNumber];
+        [chapters addObject:model];
+        
+    }
+    
+    return chapters;
+}
+
+
+
 
 #pragma mark - 解压文件路径
 +(NSString *)unZip:(NSString *)path

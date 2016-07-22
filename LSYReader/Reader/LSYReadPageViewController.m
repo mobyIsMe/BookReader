@@ -14,16 +14,20 @@
 #import "UIImage+ImageEffects.h"
 #import "LSYNoteModel.h"
 #import "LSYMarkModel.h"
+#import "ZPDFReaderController.h"
+#import "ZPDFPageController.h"
 #define AnimationDelay 0.3
 
-@interface LSYReadPageViewController ()<UIPageViewControllerDelegate,UIPageViewControllerDataSource,LSYMenuViewDelegate,UIGestureRecognizerDelegate,LSYCatalogViewControllerDelegate,LSYReadViewControllerDelegate>
+@interface LSYReadPageViewController ()<ZPDFPageModelDelegate,UIPageViewControllerDelegate,UIPageViewControllerDataSource,LSYMenuViewDelegate,UIGestureRecognizerDelegate,LSYCatalogViewControllerDelegate,LSYReadViewControllerDelegate>
 {
     NSUInteger _chapter;    //当前显示的章节
     NSUInteger _page;       //当前显示的页数
     NSUInteger _chapterChange;  //将要变化的章节
     NSUInteger _pageChange;     //将要变化的页数
     BOOL _isTransition;     //是否开始翻页
+    ZPDFPageModel *pdfPageModel;;
 }
+
 @property (nonatomic,strong) UIPageViewController *pageViewController;
 @property (nonatomic,getter=isShowBar) BOOL showBar; //是否显示状态栏
 @property (nonatomic,strong) LSYMenuView *menuView; //菜单栏
@@ -37,9 +41,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addChildViewController:self.pageViewController];
-    [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    _chapter = _model.record.chapter;
-    _page = _model.record.page;
+
+//    if(self.isPDF==YES){
+////    //setting DataSource
+//    CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)self.fileName, NULL, (__bridge CFStringRef)self.subDirName);
+//    CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
+//    CFRelease(pdfURL);
+//    pdfPageModel = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
+//    pdfPageModel.delegate=self;
+//    [self.pageViewController setDataSource:pdfPageModel];
+//    
+//    NSInteger page = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
+//    
+//    //setting initial VCs
+//    ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(page, 1)];
+//    NSArray *viewControllers = @[initialViewController];
+//    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
+//        _chapter = _model.record.chapter;
+//        _page = _model.record.page;
+//    
+//    }else{
+    
+        [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        _chapter = _model.record.chapter;
+        _page = _model.record.page;
+    //}
+    
+    
+    
+    
+    
     [self.view addGestureRecognizer:({
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showToolMenu)];
         tap.delegate = self;
@@ -225,7 +256,12 @@
     }
     _readView = [[LSYReadViewController alloc] init];
     _readView.recordModel = _model.record;
-    _readView.content = [_model.chapters[chapter] stringOfPage:page];
+    _readView.isPDF = self.isPDF;
+    if(_isPDF==NO){
+        _readView.content = [_model.chapters[chapter] stringOfPage:page];
+    }else{
+        _readView.content = @"";
+    }
     _readView.delegate = self;
     NSLog(@"_readGreate");
     

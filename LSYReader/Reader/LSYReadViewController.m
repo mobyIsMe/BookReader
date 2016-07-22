@@ -18,6 +18,8 @@
 
 @implementation LSYReadViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self prefersStatusBarHidden];
@@ -33,10 +35,25 @@
 -(LSYReadView *)readView
 {
     if (!_readView) {
-        _readView = [[LSYReadView alloc] initWithFrame:CGRectMake(LeftSpacing,TopSpacing, self.view.frame.size.width-LeftSpacing-RightSpacing, self.view.frame.size.height-TopSpacing-BottomSpacing)];
-        LSYReadConfig *config = [LSYReadConfig shareInstance];
-        _readView.frameRef = [LSYReadParser parserContent:_content config:config bouds:CGRectMake(0,0, _readView.frame.size.width, _readView.frame.size.height)];
-        _readView.content = _content;
+        _readView.isPDF = self.isPDF;
+        if(_readView.isPDF){
+            
+            //setting DataSource
+            CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)self.fileName, NULL, (__bridge CFStringRef)self.subDirName);
+            CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
+            CFRelease(pdfURL);
+            _readView.pdfDocument =pdfDocument;
+            NSInteger page = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
+            _readView = [[LSYReadView alloc] initWithFrame:CGRectMake(LeftSpacing,TopSpacing, self.view.frame.size.width-LeftSpacing-RightSpacing, self.view.frame.size.height-TopSpacing-BottomSpacing) atPage:(int)_readView.pageNO withPDFDoc:_readView.pdfDocument];
+            
+            }else{
+            _readView = [[LSYReadView alloc] initWithFrame:CGRectMake(LeftSpacing,TopSpacing, self.view.frame.size.width-LeftSpacing-RightSpacing, self.view.frame.size.height-TopSpacing-BottomSpacing)];
+            LSYReadConfig *config = [LSYReadConfig shareInstance];
+            
+            _readView.frameRef = [LSYReadParser parserContent:_content config:config bouds:CGRectMake(0,0, _readView.frame.size.width, _readView.frame.size.height)];
+            _readView.content = _content;
+        }
+       
         _readView.delegate = self;
     }
     return _readView;

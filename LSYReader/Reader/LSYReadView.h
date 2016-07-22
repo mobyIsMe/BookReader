@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 @protocol LSYReadViewControllerDelegate;
-@interface LSYReadView : UIView
+@interface LSYReadView : UIView{
+    
+    }
+@property Boolean isPDF;
+@property CGPDFDocumentRef pdfDocument;
+@property int pageNO;
+
 @property (nonatomic,assign) CTFrameRef frameRef;
 @property (nonatomic,strong) NSString *content;
+
+
 @property (nonatomic,strong) id<LSYReadViewControllerDelegate>delegate;
 -(void)cancelSelected;
+-(id)initWithFrame:(CGRect)frame atPage:(int)index withPDFDoc:(CGPDFDocumentRef) pdfDoc;
 @end

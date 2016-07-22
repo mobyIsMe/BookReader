@@ -50,6 +50,43 @@
     }
     return self;
 }
+
+/**************pdf methods****************/
+-(id)initWithFrame:(CGRect)frame atPage:(int)index withPDFDoc:(CGPDFDocumentRef) pdfDoc{
+    self = [super initWithFrame:frame];
+    if(self){
+        _pageNO = index;
+        _pdfDocument = pdfDoc;
+    }
+    return self;
+}
+
+-(void)drawInContext:(CGContextRef)context atPageNo:(int)page_no{
+    // PDF page drawing expects a Lower-Left coordinate system, so we flip the coordinate system
+    // before we start drawing.
+    CGContextTranslateCTM(context, 0.0, self.bounds.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    if (_pageNO == 0) {
+        _pageNO = 1;
+    }
+    
+    CGPDFPageRef page = CGPDFDocumentGetPage(_pdfDocument, _pageNO);
+    CGContextSaveGState(context);
+    {
+        CGRect rect = CGRectInset(self.bounds, -50, -95);
+        CGAffineTransform pdfTransform = CGPDFPageGetDrawingTransform(page, kCGPDFCropBox, rect, 0, true);
+        CGContextConcatCTM(context, pdfTransform);
+        CGContextDrawPDFPage(context, page);
+    }
+    CGContextRestoreGState(context);
+}
+
+
+
+
+/**************pdf methods****************/
+
+
 #pragma mark - Magnifier View
 -(void)showMagnifier
 {
@@ -272,16 +309,43 @@
     if (!_frameRef) {
         return;
     }
+    if(_isPDF){
+        CGContextRef context=UIGraphicsGetCurrentContext();
+        
+        //画页码
+        CGContextSaveGState(context);
+        {
+            CGContextSetLineWidth(context, 1.0);
+            CGContextSetRGBFillColor (context,  1, 1, 1, 1.0);
+            long pageSum = CGPDFDocumentGetNumberOfPages(_pdfDocument);
+            NSString *pageStr=[NSString stringWithFormat:@"第%d页，共%ld页",_pageNO,pageSum];
+            CGRect rect1=CGRectMake(0, self.bounds.size.height -30, self.bounds.size.width, 20);
+            NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+            paragraphStyle.alignment = NSTextAlignmentCenter;
+            NSDictionary *attributes=@{
+                                       NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                       NSParagraphStyleAttributeName : paragraphStyle,
+                                       NSForegroundColorAttributeName: [UIColor colorWithWhite:.6 alpha:.6]
+                                       };
+            [pageStr drawInRect:rect1 withAttributes:attributes];
+        }
+        CGContextRestoreGState(context);
+        
+        //画PDF内容
+        [self drawInContext:context atPageNo:_pageNO];
 
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
-    CGContextTranslateCTM(ctx, 0, self.bounds.size.height);
-    CGContextScaleCTM(ctx, 1.0, -1.0);
-    CGRect leftDot,rightDot = CGRectZero;
-    _menuRect = CGRectZero;
-    [self drawSelectedPath:_pathArray LeftDot:&leftDot RightDot:&rightDot];
-    CTFrameDraw(_frameRef, ctx);
-    [self drawDotWithLeft:leftDot right:rightDot];
+    }else {
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
+        CGContextTranslateCTM(ctx, 0, self.bounds.size.height);
+        CGContextScaleCTM(ctx, 1.0, -1.0);
+        CGRect leftDot,rightDot = CGRectZero;
+        _menuRect = CGRectZero;
+        [self drawSelectedPath:_pathArray LeftDot:&leftDot RightDot:&rightDot];
+        CTFrameDraw(_frameRef, ctx);
+        [self drawDotWithLeft:leftDot right:rightDot];
+    }
+    
 }
 
 @end

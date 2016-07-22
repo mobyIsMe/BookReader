@@ -19,4 +19,6 @@
 @property (nonatomic,strong) LSYRecordModel *recordModel;   //阅读进度
 @property (nonatomic,strong) LSYReadView *readView;
 @property (nonatomic,weak) id<LSYReadViewControllerDelegate>delegate;
+@property Boolean isPDF;
+@property(nonatomic,copy)NSString *fileName, *subDirName;
 @end

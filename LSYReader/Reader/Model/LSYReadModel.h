@@ -18,7 +18,7 @@
 @property (nonatomic,strong) NSMutableArray <LSYNoteModel *>*notes;
 @property (nonatomic,strong) NSMutableArray <LSYChapterModel *>*chapters;
 @property (nonatomic,strong) LSYRecordModel *record;
-//初始化TXT文件
+//初始化TXT文件 
 -(instancetype)initWithContent:(NSString *)content;
 //初始化epub文件
 -(instancetype)initWithePub:(NSString *)ePubPath;

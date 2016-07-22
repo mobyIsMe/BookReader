@@ -7,7 +7,7 @@
 //
 
 #import "LSYReadModel.h"
-
+#import"ZPDFPageModel.h"
 @implementation LSYReadModel
 
 #pragma mark - 初始化TXT
@@ -45,6 +45,8 @@
 -(instancetype)initWithPDF:(NSString*)pdfPath{
     self = [super init];
     if (self) {
+        
+        
         _chapters = [LSYReadUtilites pdfFileHandle:pdfPath];;
         _notes = [NSMutableArray array];
         _marks = [NSMutableArray array];
@@ -107,9 +109,13 @@
         else if([[key pathExtension]
                  isEqualToString:@"pdf"]){
             NSLog(@"this is pdf");
-            LSYReadModel *model = [[LSYReadModel alloc] initWithPDF:url.path];
-            model.resource = url;
-            [LSYReadModel updateLocalModel:model url:url];
+            
+            CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)[url lastPathComponent], NULL, (__bridge CFStringRef)@"files");
+            CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
+            CFRelease(pdfURL);
+            ZPDFPageModel *model = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
+             model.resource = url;
+             [LSYReadModel updateLocalModel:model url:url];
             return model;
         }
         else{

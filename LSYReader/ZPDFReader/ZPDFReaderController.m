@@ -8,20 +8,33 @@
 
 #import "ZPDFReaderController.h"
 #import "ZPDFPageController.h"
+#import "LSYReadPageViewController.h"
+#import "LSYReadViewController.h"
+#import "LSYChapterModel.h"
 #import "LSYMenuView.h"
+#import "LSYCatalogViewController.h"
+#import "UIImage+ImageEffects.h"
+#import "LSYNoteModel.h"
+#import "LSYMarkModel.h"
+#define AnimationDelay 0.3
+
 #define IOS7 ([[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0)
 
-@interface ZPDFReaderController()<LSYMenuViewDelegate>{
-    //这里添加上章节、页数等
-   /* NSUInteger _chapter;    //当前显示的章节
-    NSUInteger _page;       //当前显示的页数
-    NSUInteger _chapterChange;  //将要变化的章节
-    NSUInteger _pageChange;     //将要变化的页数
-    BOOL _isTransition;     //是否开始翻页
-    */
-}
-@property (nonatomic,getter=isShowBar) BOOL showBar; //是否显示状态栏
-
+@interface ZPDFReaderController()
+//<LSYMenuViewDelegate,UIGestureRecognizerDelegate,LSYCatalogViewControllerDelegate,LSYReadViewControllerDelegate>
+//{
+//    NSUInteger _chapter;    //当前显示的章节
+//    NSUInteger _page;       //当前显示的页数
+//    NSUInteger _chapterChange;  //将要变化的章节
+//    NSUInteger _pageChange;     //将要变化的页数
+//    BOOL _isTransition;     //是否开始翻页
+//}
+//@property (nonatomic,strong) UIPageViewController *pageViewController;
+//@property (nonatomic,getter=isShowBar) BOOL showBar; //是否显示状态栏
+//@property (nonatomic,strong) LSYMenuView *menuView; //菜单栏
+//@property (nonatomic,strong) LSYCatalogViewController *catalogVC;   //侧边栏
+//@property (nonatomic,strong) UIView * catalogView;  //侧边栏背景
+//@property (nonatomic,strong) LSYReadViewController *readView;   //当前阅读视图
 @end
 @implementation ZPDFReaderController
 {
@@ -73,6 +86,26 @@
     NSArray *viewControllers = @[initialViewController];
     [pageViewCtrl setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
     
+    
+    
+//    [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+//    _chapter = _model.record.chapter;
+//    _page = _model.record.page;
+//    [self.view addGestureRecognizer:({
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showToolMenu)];
+//        tap.delegate = self;
+//        tap;
+//    })];
+//    [self.view addSubview:self.menuView];
+//    
+//    [self addChildViewController:self.catalogVC];
+//    [self.view addSubview:self.catalogView];
+//    [self.catalogView addSubview:self.catalogVC.view];
+//    //添加笔记
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addNotes:) name:LSYNoteNotification object:nil];
+
+    
+    
     //show UIPageViewController
     [self addChildViewController:pageViewCtrl];
     [self.view addSubview:pageViewCtrl.view];
@@ -106,29 +139,29 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark- Menu View
--(LSYMenuView *)menuView
-{
-    if (!_menuView) {
-        _menuView = [[LSYMenuView alloc] init];
-        _menuView.hidden = YES;
-        _menuView.delegate = self;
-        //_menuView.recordModel = _model.record;//这个跟添加笔记有关
-    }
-    return _menuView;
-}
-
--(void)menuViewDidHidden:(LSYMenuView *)menu
-{
-    _showBar = NO;
-    [self setNeedsStatusBarAppearanceUpdate];
-}
--(void)menuViewDidAppear:(LSYMenuView *)menu
-{
-    _showBar = YES;
-    [self setNeedsStatusBarAppearanceUpdate];
-    
-}
+//#pragma mark- Menu View
+//-(LSYMenuView *)menuView
+//{
+//    if (!_menuView) {
+//        _menuView = [[LSYMenuView alloc] init];
+//        _menuView.hidden = YES;
+//        _menuView.delegate = self;
+//        //_menuView.recordModel = _model.record;//这个跟添加笔记有关
+//    }
+//    return _menuView;
+//}
+//
+//-(void)menuViewDidHidden:(LSYMenuView *)menu
+//{
+//    _showBar = NO;
+//    [self setNeedsStatusBarAppearanceUpdate];
+//}
+//-(void)menuViewDidAppear:(LSYMenuView *)menu
+//{
+//    _showBar = YES;
+//    [self setNeedsStatusBarAppearanceUpdate];
+//    
+//}
 //-(void)menuViewInvokeCatalog:(LSYBottomMenuView *)bottomMenu
 //{
 //    [_menuView hiddenAnimation:NO];

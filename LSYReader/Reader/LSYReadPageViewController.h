@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "LSYReadModel.h"
+#import "ZPDFPageModel.h"
 @interface LSYReadPageViewController : UIViewController
 @property (nonatomic,strong) NSURL *resourceURL;
 @property (nonatomic,strong) LSYReadModel *model;
+@property(nonatomic,copy)NSString *fileName, *subDirName;
+@property Boolean isPDF;
 //+(void)loadURL:(NSURL *)url;
 @end
