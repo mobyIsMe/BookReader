@@ -40,32 +40,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+
+    if(self.isPDF==YES){
+        //initial UIPageViewController
+        NSDictionary *options = @{UIPageViewControllerOptionSpineLocationKey : @(UIPageViewControllerSpineLocationMin)};
+        self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
+                                                       navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                                                     options:options];
+        
+        
+
+    //setting DataSource
+    CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)self.fileName, NULL, (__bridge CFStringRef)self.subDirName);
+    CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
+    CFRelease(pdfURL);
+    pdfPageModel = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
+    pdfPageModel.delegate=self;
+    [self.pageViewController setDataSource:pdfPageModel];
+    
+    NSInteger page = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
+    
+    //setting initial VCs
+    ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(page, 1)];
+    NSArray *viewControllers = @[initialViewController];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
+    [self.view addSubview:self.pageViewController.view];
+        
+   }else{
+                [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+       }
     [self addChildViewController:self.pageViewController];
 
-//    if(self.isPDF==YES){
-////    //setting DataSource
-//    CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)self.fileName, NULL, (__bridge CFStringRef)self.subDirName);
-//    CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
-//    CFRelease(pdfURL);
-//    pdfPageModel = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
-//    pdfPageModel.delegate=self;
-//    [self.pageViewController setDataSource:pdfPageModel];
-//    
-//    NSInteger page = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
-//    
-//    //setting initial VCs
-//    ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(page, 1)];
-//    NSArray *viewControllers = @[initialViewController];
-//    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
-//        _chapter = _model.record.chapter;
-//        _page = _model.record.page;
-//    
-//    }else{
-    
-        [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
         _chapter = _model.record.chapter;
         _page = _model.record.page;
-    //}
+    
     
     
     
@@ -122,7 +131,7 @@
 }
 -(UIPageViewController *)pageViewController
 {
-    if (!_pageViewController) {
+    if (!_pageViewController&&!self.isPDF) {
         _pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
         _pageViewController.delegate = self;
         _pageViewController.dataSource = self;
@@ -257,10 +266,27 @@
     _readView = [[LSYReadViewController alloc] init];
     _readView.recordModel = _model.record;
     _readView.isPDF = self.isPDF;
+    _readView.fileName = self.fileName;
+    _readView.subDirName = self.subDirName;
     if(_isPDF==NO){
         _readView.content = [_model.chapters[chapter] stringOfPage:page];
     }else{
         _readView.content = @"";
+//        //setting DataSource
+//        CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)self.fileName, NULL, (__bridge CFStringRef)self.subDirName);
+//        CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
+//        CFRelease(pdfURL);
+//        pdfPageModel = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
+//        pdfPageModel.delegate=self;
+//        [_readView setDataSource:pdfPageModel];
+//        
+//        NSInteger page = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
+//        
+//        //setting initial VCs
+//        ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(page, 1)];
+//        NSArray *viewControllers = @[initialViewController];
+//        [pageViewCtrl setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
+
     }
     _readView.delegate = self;
     NSLog(@"_readGreate");

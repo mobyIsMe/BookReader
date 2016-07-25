@@ -36,7 +36,7 @@
 {
     if (!_readView) {
         _readView.isPDF = self.isPDF;
-        if(_readView.isPDF){
+        if(_readView.isPDF==YES){
             
             //setting DataSource
             CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)self.fileName, NULL, (__bridge CFStringRef)self.subDirName);

@@ -10,16 +10,19 @@
 #import "LSYReadConfig.h"
 @implementation LSYReadParser
 +(CTFrameRef)parserContent:(NSString *)content config:(LSYReadConfig *)parser bouds:(CGRect)bounds
-{
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:content];
-    NSDictionary *attribute = [self parserAttribute:parser];
-    [attributedString setAttributes:attribute range:NSMakeRange(0, content.length)];
-    CTFramesetterRef setterRef = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attributedString);
-    CGPathRef pathRef = CGPathCreateWithRect(bounds, NULL);
-    CTFrameRef frameRef = CTFramesetterCreateFrame(setterRef, CFRangeMake(0, 0), pathRef, NULL);
-    CFRelease(setterRef);
-    CFRelease(pathRef);
+{    CTFrameRef frameRef;
+    if(content!=nil){
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:content];
+        NSDictionary *attribute = [self parserAttribute:parser];
+        [attributedString setAttributes:attribute range:NSMakeRange(0, content.length)];
+        CTFramesetterRef setterRef = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attributedString);
+        CGPathRef pathRef = CGPathCreateWithRect(bounds, NULL);
+        frameRef = CTFramesetterCreateFrame(setterRef, CFRangeMake(0, 0), pathRef, NULL);
+        CFRelease(setterRef);
+        CFRelease(pathRef);
+            }
     return frameRef;
+
     
 }
 +(NSDictionary *)parserAttribute:(LSYReadConfig *)config

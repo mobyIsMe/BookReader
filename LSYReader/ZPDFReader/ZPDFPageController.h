@@ -10,7 +10,7 @@
 #import "LSYRecordModel.h"
 #import "LSYReadView.h"
 #import "LSYReadViewController.h"
-@interface ZPDFPageController : LSYReadViewController
+@interface ZPDFPageController : UIViewController
 
 @property (assign, nonatomic) CGPDFDocumentRef pdfDocument;
 @property (assign, nonatomic) long pageNO;
