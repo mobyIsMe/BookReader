@@ -5,7 +5,7 @@
 //  Created by Labanotation on 16/5/30.
 //  Copyright © 2016年 okwei. All rights reserved.
 //
-
+#import "PDFDocumentOutlineItem.h"
 #import "LSYReadPageViewController.h"
 #import "LSYReadViewController.h"
 #import "LSYChapterModel.h"
@@ -26,6 +26,7 @@
     NSUInteger _pageChange;     //将要变化的页数
     BOOL _isTransition;     //是否开始翻页
     ZPDFPageModel *pdfPageModel;;
+    CGPDFDocumentRef pdfDocument;
 }
 
 @property (nonatomic,strong) UIPageViewController *pageViewController;
@@ -53,10 +54,11 @@
 
     //setting DataSource
     CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)self.fileName, NULL, (__bridge CFStringRef)self.subDirName);
-    CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
+    pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
     CFRelease(pdfURL);
     pdfPageModel = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
     pdfPageModel.delegate=self;
+    pdfPageModel.fileName = self.fileName;
     [self.pageViewController setDataSource:pdfPageModel];
     
     NSInteger page = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
@@ -66,18 +68,16 @@
     NSArray *viewControllers = @[initialViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
     [self.view addSubview:self.pageViewController.view];
-        
-   }else{
-                [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-       }
     [self addChildViewController:self.pageViewController];
 
+   }else{
+       
+       [self addChildViewController:self.pageViewController];
+       [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    }
+    
         _chapter = _model.record.chapter;
         _page = _model.record.page;
-    
-    
-    
-    
     
     
     [self.view addGestureRecognizer:({
@@ -164,12 +164,35 @@
 }
 #pragma mark - CatalogViewController Delegate
 -(void)catalog:(LSYCatalogViewController *)catalog didSelectChapter:(NSUInteger)chapter page:(NSUInteger)page
-{
-     [_pageViewController setViewControllers:@[[self readViewWithChapter:chapter page:page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+{  if(!self.isPDF){
+    [_pageViewController setViewControllers:@[[self readViewWithChapter:chapter page:page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    //[self updateReadModelWithChapter:chapter page:page];
+}else{
+    // Return the data view controller for the given index.
+    long pageSum = CGPDFDocumentGetNumberOfPages(pdfDocument);
+    if (pageSum== 0 || page >= pageSum+1) {//错误处理
+        //return nil;
+    }
+    // Create a new view controller and pass suitable data.
+    ZPDFPageController *pageController = [[ZPDFPageController alloc] init];
+    pageController.pdfDocument = pdfDocument;
+    PDFDocumentOutlineItem* item = [self->pdfPageModel.items objectAtIndex:chapter];
+    pageController.pageNO  = item.pageNumber;
+    [_pageViewController setViewControllers: @[pageController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+
+}
     [self updateReadModelWithChapter:chapter page:page];
     [self hiddenCatalog];
     
 }
+
+//-(void)pageChanged:(NSInteger)page
+//{
+//    [[NSUserDefaults standardUserDefaults] setInteger:page forKey:_fileName];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//}
+
+
 #pragma mark -  UIGestureRecognizer Delegate
 //解决TabView与Tap手势冲突
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
@@ -387,4 +410,18 @@
     _catalogVC.view.frame = CGRectMake(0, 0, ViewSize(self.view).width-100, ViewSize(self.view).height);
     [_catalogVC reload];
 }
+
+- (ZPDFPageController *)viewControllerAtIndex:(NSUInteger)pageNO {
+    // Return the data view controller for the given index.
+    long pageSum = CGPDFDocumentGetNumberOfPages(pdfDocument);
+    if (pageSum== 0 || pageNO >= pageSum+1) {
+        return nil;
+    }
+    // Create a new view controller and pass suitable data.
+    ZPDFPageController *pageController = [[ZPDFPageController alloc] init];
+    pageController.pdfDocument = pdfDocument;
+    pageController.pageNO  = pageNO;
+    return pageController;
+}
+
 @end

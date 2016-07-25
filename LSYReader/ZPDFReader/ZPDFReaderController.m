@@ -212,6 +212,7 @@
 {
     [[NSUserDefaults standardUserDefaults] setInteger:page forKey:_fileName];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"PageChanged @%ld",(long)page);
 }
 
 - (void)didReceiveMemoryWarning {

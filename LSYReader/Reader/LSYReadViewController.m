@@ -43,7 +43,6 @@
             CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
             CFRelease(pdfURL);
             _readView.pdfDocument =pdfDocument;
-            NSInteger page = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
             _readView = [[LSYReadView alloc] initWithFrame:CGRectMake(LeftSpacing,TopSpacing, self.view.frame.size.width-LeftSpacing-RightSpacing, self.view.frame.size.height-TopSpacing-BottomSpacing) atPage:(int)_readView.pageNO withPDFDoc:_readView.pdfDocument];
             
             }else{

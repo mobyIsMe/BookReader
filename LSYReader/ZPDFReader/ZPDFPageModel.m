@@ -65,6 +65,10 @@
         return nil;
     }
     index--;
+//    //存储变化的页码
+//    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:self.fileName];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+
     if(_delegate && [_delegate respondsToSelector:@selector(pageChanged:)])
     {
         [_delegate pageChanged:index];
@@ -82,10 +86,16 @@
     if (index >= pageSum+1) {
         return nil;
     }
+//    //存储变化的页码
+//    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:self.fileName];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+
     if(_delegate && [_delegate respondsToSelector:@selector(pageChanged:)])
     {
         [_delegate pageChanged:index];
     }
     return [self viewControllerAtIndex:index];
 }
+
+
 @end

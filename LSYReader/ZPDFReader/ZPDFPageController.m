@@ -17,7 +17,7 @@
 
 @end
 
-@implementation ZPDFPageController
+@implementation ZPDFPageController//这里控制每个页面的view的显示
 
 - (void)viewDidLoad {
     [super viewDidLoad];
