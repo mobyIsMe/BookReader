@@ -11,6 +11,7 @@
 #import "PDFDocumentOutline.h"
 #import "LSYChapterModel.h"
 #import "PDFDocumentOutlineItem.h"
+#import "LSYReadModel.h"
 @implementation ZPDFPageModel
 
 -(id) initWithPDFDocument:(CGPDFDocumentRef) pdfDoc {
@@ -52,6 +53,8 @@
     ZPDFPageController *pageController = [[ZPDFPageController alloc] init];
     pageController.pdfDocument = pdfDocument;
     pageController.pageNO  = pageNO;
+    [self pageChanged:pageNO];
+    //updateReadModelWithpage:pageNO;
     return pageController;
 }
 
@@ -65,9 +68,8 @@
         return nil;
     }
     index--;
-//    //存储变化的页码
-//    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:self.fileName];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    //存储变化的页码
+    [self pageChanged:index];
 
     if(_delegate && [_delegate respondsToSelector:@selector(pageChanged:)])
     {
@@ -86,9 +88,8 @@
     if (index >= pageSum+1) {
         return nil;
     }
-//    //存储变化的页码
-//    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:self.fileName];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    //存储变化的页码
+    [self pageChanged:index];
 
     if(_delegate && [_delegate respondsToSelector:@selector(pageChanged:)])
     {
@@ -97,5 +98,11 @@
     return [self viewControllerAtIndex:index];
 }
 
+-(void)pageChanged:(NSInteger)page
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:page forKey:[_fileName stringByAppendingString:@"page"]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"PageChanged @%ld",(long)page);
+}
 
 @end

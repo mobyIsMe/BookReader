@@ -59,25 +59,28 @@
     pdfPageModel = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
     pdfPageModel.delegate=self;
     pdfPageModel.fileName = self.fileName;
+    pdfPageModel.resourceURL = _resourceURL;
     [self.pageViewController setDataSource:pdfPageModel];
     
-    NSInteger page = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
-    
+    NSInteger pageFromLocal = [[NSUserDefaults standardUserDefaults] integerForKey:[_fileName stringByAppendingString:@"page"]];
     //setting initial VCs
-    ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(page, 1)];
+    //int pageFromModel= _model.record.page;
+    ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(pageFromLocal, 1)];
     NSArray *viewControllers = @[initialViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
     [self.view addSubview:self.pageViewController.view];
     [self addChildViewController:self.pageViewController];
+    _page = pageFromLocal;
 
    }else{
        
        [self addChildViewController:self.pageViewController];
        [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+       _page = _model.record.page;
+
     }
     
         _chapter = _model.record.chapter;
-        _page = _model.record.page;
     
     
     [self.view addGestureRecognizer:({
@@ -166,7 +169,7 @@
 -(void)catalog:(LSYCatalogViewController *)catalog didSelectChapter:(NSUInteger)chapter page:(NSUInteger)page
 {  if(!self.isPDF){
     [_pageViewController setViewControllers:@[[self readViewWithChapter:chapter page:page]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    //[self updateReadModelWithChapter:chapter page:page];
+    [self updateReadModelWithChapter:chapter page:page];
 }else{
     // Return the data view controller for the given index.
     long pageSum = CGPDFDocumentGetNumberOfPages(pdfDocument);
@@ -179,10 +182,13 @@
     PDFDocumentOutlineItem* item = [self->pdfPageModel.items objectAtIndex:chapter];
     pageController.pageNO  = item.pageNumber;
     [_pageViewController setViewControllers: @[pageController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    [self updateReadModelWithChapter:chapter page:pageController.pageNO];//更新选择目录时的页码
+    [[NSUserDefaults standardUserDefaults] setInteger:pageController.pageNO forKey:[_fileName stringByAppendingString:@"page"]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
 
 }
-    [self updateReadModelWithChapter:chapter page:page];
-    [self hiddenCatalog];
+       [self hiddenCatalog];
     
 }
 

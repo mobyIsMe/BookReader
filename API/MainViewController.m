@@ -218,7 +218,7 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-        pageView.model = [LSYReadModel getLocalModelWithURL:pageView.resourceURL];
+        pageView.model = [LSYReadModel getLocalModelWithURL:pageView.resourceURL];//这个model存储了归档的阅读参数：进度（chapter、page），笔记，背景主题，字体大小
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self presentViewController:pageView animated:YES completion:nil];

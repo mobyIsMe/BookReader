@@ -88,6 +88,7 @@
     [archiver finishEncoding];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:key];
 }
+
 +(id)getLocalModelWithURL:(NSURL *)url
 {
     NSString *key = [url.path lastPathComponent];

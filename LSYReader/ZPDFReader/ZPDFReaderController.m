@@ -210,7 +210,7 @@
 
 -(void)pageChanged:(NSInteger)page
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:page forKey:_fileName];
+    [[NSUserDefaults standardUserDefaults] setInteger:page forKey:[_fileName stringByAppendingString:@"page"]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSLog(@"PageChanged @%ld",(long)page);
 }

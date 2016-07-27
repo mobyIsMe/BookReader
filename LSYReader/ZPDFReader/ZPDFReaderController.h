@@ -12,6 +12,6 @@
 @interface ZPDFReaderController : UIViewController<ZPDFPageModelDelegate>
 
 @property(nonatomic,copy)NSString *fileName, *subDirName;
-
+@property (nonatomic,strong) LSYReadModel *model;
 
 @end

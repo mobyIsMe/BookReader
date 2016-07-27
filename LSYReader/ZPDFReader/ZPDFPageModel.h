@@ -20,6 +20,9 @@
     CGPDFDocumentRef pdfDocument;
     
 }
+@property (nonatomic,strong) NSURL *resourceURL;
+@property int pageChanged;
+@property int chapterChanged;
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, assign) id<ZPDFPageModelDelegate>delegate;
 @property (nonatomic, strong) NSString* fileName;
