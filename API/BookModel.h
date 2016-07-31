@@ -20,5 +20,8 @@ typedef NS_ENUM(NSInteger, BookType) {
 @property(nonatomic,copy) NSString *bookName;
 @property(nonatomic,copy) NSString *filePath;
 @property(nonatomic,assign) BookType bookType;
-
+@property(nonatomic,copy) NSString *authorName;
+@property(nonatomic,copy) NSNumber* bookSize;
+@property Boolean isSelected;
+-(id)initWithDict:(NSDictionary*) dict;
 @end

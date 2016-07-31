@@ -262,12 +262,14 @@
     [self catalogShowState:YES];
     
 }
-
+#pragma mark- 底部菜单栏跳往下一章
 -(void)menuViewJumpChapter:(NSUInteger)chapter page:(NSUInteger)page
 {
     [_pageViewController setViewControllers:@[[self readViewWithChapter:chapter page:page]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     [self updateReadModelWithChapter:chapter page:page];
 }
+
+#pragma mark-底部菜单栏 改变字体大小
 -(void)menuViewFontSize:(LSYBottomMenuView *)bottomMenu
 {
 

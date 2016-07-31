@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BookStoreTabBar : UIViewController
+@interface BookStoreTabBar : UITableViewController
+@property(nonatomic,strong)NSArray* dataArr;
 - (id) initBookStore;
 @end

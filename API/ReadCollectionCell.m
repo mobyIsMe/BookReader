@@ -31,6 +31,9 @@
         self.txtSign = [[UILabel alloc]init];
         //self.txtSign.textAlignment = NSTextAlignmentRight;
         [self addSubview:self.txtSign];
+        self.deleteBtn = [[UIButton alloc]init];
+        [self addSubview:self.deleteBtn];
+        
     }
     
     return self;
@@ -48,8 +51,8 @@
     self.bookNameLabel.frame = CGRectMake(self.imageView.frame.origin.x, CGRectGetMaxY(self.imageView.frame), CGRectGetWidth(self.frame), titleHeight);
     self.txtBookName.frame = CGRectMake(self.imageView.frame.origin.x, CGRectGetMaxY(self.imageView.frame)/4, CGRectGetWidth(self.frame), 20);
     self.txtSign.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame)-txtSignHeight, CGRectGetWidth(self.frame),txtSignHeight);
-    
-
+    self.deleteBtn.frame = CGRectMake(CGRectGetWidth(self.frame)-20,0,20,20);
+    [self.deleteBtn setImage:[UIImage imageNamed:@"UIRemoveControlMinus"] forState:UIControlStateNormal];
 }
 
 // 自定义方法
@@ -57,6 +60,7 @@
 {
     UIImage *coverimg = nil;
     if(model.bookType == BookTypePDF){
+        self.imageView.backgroundColor = [UIColor whiteColor];
         NSString* fileStr  = [[NSBundle mainBundle] pathForResource:model.bookName ofType:@"pdf"];
         CGPDFDocumentRef pdfDocumentRef = [self pdfRefByFilePath:fileStr];
         coverimg  = [self imageFromPDFWithDocumentRef:pdfDocumentRef];
@@ -65,6 +69,9 @@
     }else if (model.bookType==BookTypeTXT){
         self.imageView.backgroundColor = [UIColor colorWithRed:50/255.0 green:155/255.0 blue:213/255.0 alpha:1.0];
         self.txtSign.text = @"TXT";
+        [self.txtBookName setHidden:NO];
+        [self.txtSign setHidden:NO];
+
         
     }else{
         coverimg = [UIImage imageWithContentsOfFile:model.cover];
@@ -79,6 +86,8 @@
             self.txtSign.text = @"EPUB";
             
         }
+        [self.txtBookName setHidden:YES];
+        [self.txtSign setHidden:YES];
     }
     //添加边框
     self.imageView.image = coverimg;
@@ -93,7 +102,12 @@
     [self.bookNameLabel sizeToFit];
     self.txtSign.textColor = [UIColor whiteColor];
     self.txtSign.font = [UIFont fontWithName:@"HelveticaNeue-Thin" size:30];
+    if(model.isSelected==NO){
+        [self.deleteBtn setHidden:YES];
+    }else{
+        [self.deleteBtn setHidden:NO];
 
+    }
 //    这里只是说明BookType 用途，按正常的应该是解压epub 格式或者初始化pdf 之后 截图保存本地，然后把对应的封面存到数据，取值的时候直接使用 cover 这个属性
 }
 

@@ -14,6 +14,7 @@
 @property(nonatomic, strong) UILabel *bookNameLabel;
 @property(nonatomic,strong)UILabel *txtBookName;
 @property(nonatomic,strong)UILabel *txtSign;
+@property(nonatomic,strong)UIButton* deleteBtn;
 - (void)configBookCellModel:(BookModel *)model;
 
 @end

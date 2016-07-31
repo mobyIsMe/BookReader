@@ -25,6 +25,7 @@
     UITabBarController* tabBarControllers = [[UITabBarController alloc]init];
     
     _navigationController = [[UINavigationController alloc]initWithRootViewController:[[MainViewController alloc] init]];
+    
     BookStoreTabBar* bookStore = [[BookStoreTabBar alloc]initBookStore];
     AboutTabBar* about = [[AboutTabBar alloc]initAbout];
     tabBarControllers.viewControllers = @[_navigationController,bookStore,about];

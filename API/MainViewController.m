@@ -21,10 +21,21 @@
 static NSInteger padding = 10;
 static NSInteger count = 3; // 每行三个
 static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
+NS_ENUM(NSInteger,CellState){
+    
+    //右上角编辑按钮的两种状态；
+    //正常的状态，按钮显示“编辑”;
+    NormalState,
+    //正在删除时候的状态，按钮显示“完成”；
+    DeleteState
+    
+};  
 
 @interface MainViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic,strong) UICollectionView *collectionView;
 @property (nonatomic,strong) NSMutableArray *dataArray;
+@property(nonatomic,assign) enum CellState;
+
 @end
 
 @implementation MainViewController
@@ -66,13 +77,19 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"书架";
+     self.title = @"书架";
+    //self.navigationItem.title = @"书架";
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain
+                                                                  target:self action:@selector(editBookShelf:)];
+    self.navigationItem.rightBarButtonItem = editButton;
+   
     // collectionView 布局
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.minimumLineSpacing = 50;//行距
     flowLayout.minimumInteritemSpacing = 1;
-
+    //一开始是正常状态；
+    CellState = NormalState;
     // collectionView 初始化
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     self.collectionView.frame = CGRectMake(0, 0, DF_WIDTH, DF_HEIGHT);
@@ -104,27 +121,45 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
     ReadCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCollectionCellIdentifier forIndexPath:indexPath];
     BookModel *bookModel =  self.dataArray[indexPath.row];
     [cell configBookCellModel:bookModel];//设置bookmodel的封面
+    [cell.deleteBtn addTarget:self action:@selector(deleteCellButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+    
     return cell;
 }
+
+#pragma mark- 点击每个cell的删除按钮
+- (void)deleteCellButtonPressed: (id)sender{
+    ReadCollectionCell *cell = (ReadCollectionCell *)[sender superview];//获取cell
+    
+    NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];//获取cell对应的indexpath;
+    [self.dataArray removeObjectAtIndex:indexpath.row];
+    
+    [self.collectionView reloadData];
+    
+}  
+
 
 
 //点击每本书事件
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     BookModel *bookModel = [self.dataArray objectAtIndex:indexPath.row];
-    switch (bookModel.bookType) {
-        case BookTypePDF:
-            [self beginPDF:bookModel];
-            break;
-        case BookTypeTXT:
-            [self beginTXT:bookModel];
-            break;
-        case BookTypeEPUB:
-            [self beginEpub:bookModel];
-            break;
-        default:
-            break;
+    if(bookModel.isSelected==NO){
+        switch (bookModel.bookType) {
+            case BookTypePDF:
+                [self beginPDF:bookModel];
+                break;
+            case BookTypeTXT:
+                [self beginTXT:bookModel];
+                break;
+            case BookTypeEPUB:
+                [self beginEpub:bookModel];
+                break;
+            default:
+                break;
+        }
     }
+    
 }
 
 //返回这个UICollectionView是否可以被选择
@@ -132,6 +167,53 @@ static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
 {
     return YES;
 }
+
+
+- (IBAction)editBookShelf:(id)sender {
+   if(CellState==NormalState){//    //从正常状态变为可删除状态；
+       CellState = DeleteState;
+       self.navigationItem.rightBarButtonItem.title = @"完成";
+       for(BookModel* item in self.dataArray){
+                item.isSelected = YES;
+               }
+       
+   }else{
+       CellState = NormalState;
+       self.navigationItem.rightBarButtonItem.title = @"编辑";
+       for(BookModel* item in self.dataArray){
+           
+           item.isSelected = NO;
+        }
+      
+   }
+    
+//    //从正常状态变为可删除状态；
+//    if (CellState == NormalState) {
+//        
+//        CellState = DeleteState;
+//        self.navigationItem.rightBarButtonItem.title = @"完成";
+//        
+//        //循环遍历整个CollectionView；
+//        for(ReadCollectionCell *cell in self.collectionView.visibleCells){
+//            
+//            NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+//            
+//                [cell.deleteBtn setHidden:false];
+//            
+//        }
+//        
+//        
+//    }
+//    else if (CellState == DeleteState){
+//        
+//        CellState = NormalState;
+//        self.navigationItem.rightBarButtonItem.title = @"编辑";
+//    }  
+    [self.collectionView reloadData];
+    
+}  
+
+
 
 #pragma mark --UICollectionViewDelegateFlowLayout
 //定义每个UICollectionView 的大小
