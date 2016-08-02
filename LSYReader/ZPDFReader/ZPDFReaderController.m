@@ -186,17 +186,6 @@
 
 
 
--(void)menuViewMark:(LSYTopMenuView *)topMenu
-{
-    
-    LSYMarkModel *model = [[LSYMarkModel alloc] init];
-    model.date = [NSDate date];
-    //model.recordModel = [_model.record copy];
-    //[[_model mutableArrayValueForKey:@"marks"] addObject:model];
-    
-}
-
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
