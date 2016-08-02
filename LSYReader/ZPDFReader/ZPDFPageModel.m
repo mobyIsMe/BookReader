@@ -12,6 +12,18 @@
 #import "LSYChapterModel.h"
 #import "PDFDocumentOutlineItem.h"
 #import "LSYReadModel.h"
+@interface ZPDFPageModel(){
+    
+        NSUInteger _chapter;    //当前显示的章节
+        NSUInteger _page;       //当前显示的页数
+        NSUInteger _chapterChange;  //将要变化的章节
+        NSUInteger _pageChange;     //将要变化的页数
+        BOOL _isTransition;     //是否开始翻页
+    
+
+}
+@end
+
 @implementation ZPDFPageModel
 
 -(id) initWithPDFDocument:(CGPDFDocumentRef) pdfDoc {
@@ -43,17 +55,22 @@
 }
 
 
-- (ZPDFPageController *)viewControllerAtIndex:(NSUInteger)pageNO {
+- (ZPDFPageController *)viewControllerAtIndex:(NSUInteger)pageNO withChapterNO:(NSUInteger)chapterNO {
     // Return the data view controller for the given index.
     long pageSum = CGPDFDocumentGetNumberOfPages(pdfDocument);
     if (pageSum== 0 || pageNO >= pageSum+1) {
+        return nil;
+    }
+    if(chapterNO==0||chapterNO>=super.chapters.count+1){
         return nil;
     }
     // Create a new view controller and pass suitable data.
     ZPDFPageController *pageController = [[ZPDFPageController alloc] init];
     pageController.pdfDocument = pdfDocument;
     pageController.pageNO  = pageNO;
-    [self pageChanged:pageNO];
+    pageController.chapterNO = chapterNO;
+    _chapter = chapterNO;
+    [self pageChanged:pageNO withChapter: chapterNO];
     //updateReadModelWithpage:pageNO;
     return pageController;
 }
@@ -68,14 +85,26 @@
         return nil;
     }
     index--;
-    //存储变化的页码
-    [self pageChanged:index];
+    
+    if(_chapter>0){
+        PDFDocumentOutlineItem* itemTemp = _items[_chapter-1];//本章的第一页的页码
+        if((index == itemTemp.pageNumber-1)){
+            _chapter--;
+        }
+    }
+    //存储变化的页码//存储变化的章节
+    [self pageChanged:index withChapter:_chapter];
+    
+    //return [self readViewWithChapter:_chapterChange page:_pageChange];
+
+    //[self updateReadModelWithChapter:_chapter page:_page];
+    
 
     if(_delegate && [_delegate respondsToSelector:@selector(pageChanged:)])
     {
         [_delegate pageChanged:index];
     }
-    return [self viewControllerAtIndex:index];
+    return [self viewControllerAtIndex:index withChapterNO:_chapter];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
@@ -88,21 +117,42 @@
     if (index >= pageSum+1) {
         return nil;
     }
-    //存储变化的页码
-    [self pageChanged:index];
+    
+    
+    if(_chapter<= _items.count){
+      PDFDocumentOutlineItem* itemTemp = _items[_chapter];//下一章的第一页
+      if((index == itemTemp.pageNumber)){
+         _chapter++;
+      }
+    }
+    //存储变化的页码//存储变化的章节
+    [self pageChanged:index withChapter:_chapter];
+    //[self updateReadModelWithChapter:_chapter page:_page];
 
     if(_delegate && [_delegate respondsToSelector:@selector(pageChanged:)])
     {
         [_delegate pageChanged:index];
     }
-    return [self viewControllerAtIndex:index];
+    return [self viewControllerAtIndex:index withChapterNO:_chapter];
 }
 
--(void)pageChanged:(NSInteger)page
+-(void)pageChanged:(NSInteger)page withChapter:(NSInteger)chapter
 {
     [[NSUserDefaults standardUserDefaults] setInteger:page forKey:[_fileName stringByAppendingString:@"page"]];
+    [[NSUserDefaults standardUserDefaults] setInteger:chapter forKey:[_fileName stringByAppendingString:@"chapter"]];
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSLog(@"PageChanged @%ld",(long)page);
 }
+
+-(void)updateReadModelWithChapter:(NSUInteger)chapter page:(NSUInteger)page
+{
+
+    super.record.chapterModel = super.chapters[chapter];
+    super.record.chapter = chapter;
+    super.record.page = page;
+    [LSYReadModel updateLocalModel:self url:_resourceURL];
+}
+
 
 @end

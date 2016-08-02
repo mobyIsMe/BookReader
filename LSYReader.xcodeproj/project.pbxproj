@@ -22,10 +22,7 @@
 		515501DA1D2CEC65009E267F /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 515501D11D2CEC65009E267F /* GMGridViewLayoutStrategies.m */; };
 		515501DB1D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 515501D31D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.m */; };
 		515501DC1D2CEC65009E267F /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 515501D51D2CEC65009E267F /* UIView+GMGridViewAdditions.m */; };
-		515501DD1D2CEC65009E267F /* Demo1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 515501D71D2CEC65009E267F /* Demo1ViewController.m */; };
-		515501E11D2CED42009E267F /* book.png in Resources */ = {isa = PBXBuildFile; fileRef = 515501DE1D2CED42009E267F /* book.png */; };
 		515501E21D2CED42009E267F /* close_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 515501DF1D2CED42009E267F /* close_x.png */; };
-		515501E31D2CED42009E267F /* shelf.png in Resources */ = {isa = PBXBuildFile; fileRef = 515501E01D2CED42009E267F /* shelf.png */; };
 		515503431D2FD8A1009E267F /* AboutTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503411D2FD8A1009E267F /* AboutTabBar.m */; };
 		515503441D2FD8A1009E267F /* BookStoreTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503421D2FD8A1009E267F /* BookStoreTabBar.m */; };
 		515F20C81D3904DB008FDFD9 /* PDFDocumentOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 515F20C71D3904DB008FDFD9 /* PDFDocumentOutline.m */; };
@@ -124,11 +121,7 @@
 		515501D31D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
 		515501D41D2CEC65009E267F /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
 		515501D51D2CEC65009E267F /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
-		515501D61D2CEC65009E267F /* Demo1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Demo1ViewController.h; path = ../Demo1ViewController.h; sourceTree = "<group>"; };
-		515501D71D2CEC65009E267F /* Demo1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Demo1ViewController.m; path = ../Demo1ViewController.m; sourceTree = "<group>"; };
-		515501DE1D2CED42009E267F /* book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = book.png; sourceTree = "<group>"; };
 		515501DF1D2CED42009E267F /* close_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_x.png; sourceTree = "<group>"; };
-		515501E01D2CED42009E267F /* shelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shelf.png; sourceTree = "<group>"; };
 		5155033F1D2FD833009E267F /* AboutTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTabBar.h; sourceTree = "<group>"; };
 		515503401D2FD86C009E267F /* BookStoreTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BookStoreTabBar.h; path = ../../BookStoreTabBar.h; sourceTree = "<group>"; };
 		515503411D2FD8A1009E267F /* AboutTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTabBar.m; sourceTree = "<group>"; };
@@ -482,9 +475,7 @@
 		AB9A96B91CFC2EE80066030C /* LSYReader */ = {
 			isa = PBXGroup;
 			children = (
-				515501DE1D2CED42009E267F /* book.png */,
 				515501DF1D2CED42009E267F /* close_x.png */,
-				515501E01D2CED42009E267F /* shelf.png */,
 				5106EF441D24C8A600C33C11 /* back_nav@2x.png */,
 				5106EF351D23CAE700C33C11 /* ZPDFReader */,
 				517331B51D35EF5A009089DE /* DataModel */,
@@ -493,8 +484,6 @@
 				AB9A96BD1CFC2EE80066030C /* AppDelegate.h */,
 				517331B81D363198009089DE /* MainViewController.h */,
 				517331B91D363198009089DE /* MainViewController.m */,
-				515501D61D2CEC65009E267F /* Demo1ViewController.h */,
-				515501D71D2CEC65009E267F /* Demo1ViewController.m */,
 				AB9A96BE1CFC2EE80066030C /* AppDelegate.m */,
 				AB9A96E21CFC3AC60066030C /* LSYReader-Prefix.pch */,
 				871E61791D127D880047AAFE /* libz.tbd */,
@@ -667,9 +656,7 @@
 				5106EF451D24C8A600C33C11 /* back_nav@2x.png in Resources */,
 				515501E21D2CED42009E267F /* close_x.png in Resources */,
 				517331C31D3670B5009089DE /* 民调局异闻录.txt in Resources */,
-				515501E31D2CED42009E267F /* shelf.png in Resources */,
 				517331C21D3670B5009089DE /* 细说明朝.epub in Resources */,
-				515501E11D2CED42009E267F /* book.png in Resources */,
 				8726DA4B1D07FF830072323A /* bt_tjcp_no@2x.png in Resources */,
 				8726DA511D08021E0072323A /* sale_discount_yellow.png in Resources */,
 				ABE8ABE21CFED88300693078 /* bg_back_white@2x.png in Resources */,
@@ -721,7 +708,6 @@
 				AB9A96BF1CFC2EE80066030C /* AppDelegate.m in Sources */,
 				ABE8ABDD1CFEBB8300693078 /* LSYBottomMenuView.m in Sources */,
 				AB9A96D41CFC2F480066030C /* LSYReadPageViewController.m in Sources */,
-				515501DD1D2CEC65009E267F /* Demo1ViewController.m in Sources */,
 				517331BC1D363198009089DE /* BookModel.m in Sources */,
 				515501DC1D2CEC65009E267F /* UIView+GMGridViewAdditions.m in Sources */,
 				871E61081D1252B20047AAFE /* CXMLDocument_PrivateExtensions.m in Sources */,

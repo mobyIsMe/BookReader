@@ -14,5 +14,6 @@
 
 @property (assign, nonatomic) CGPDFDocumentRef pdfDocument;
 @property (assign, nonatomic) long pageNO;
+@property(assign,nonatomic)long chapterNO;
 
 @end

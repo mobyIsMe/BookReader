@@ -80,9 +80,10 @@
     [pageViewCtrl setDataSource:pdfPageModel];
     
     NSInteger page = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
+    NSInteger chapter = [[NSUserDefaults standardUserDefaults] integerForKey:_fileName];
     
     //setting initial VCs
-    ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(page, 1)];
+    ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(page, 1) withChapterNO:chapter];
     NSArray *viewControllers = @[initialViewController];
     [pageViewCtrl setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
     

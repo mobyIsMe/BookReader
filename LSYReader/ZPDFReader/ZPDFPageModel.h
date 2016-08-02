@@ -28,7 +28,7 @@
 @property (nonatomic, strong) NSString* fileName;
 -(id) initWithPDFDocument:(CGPDFDocumentRef) pdfDocument;
 
-- (ZPDFPageController *)viewControllerAtIndex:(NSUInteger)index;
+- (ZPDFPageController *)viewControllerAtIndex:(NSUInteger)index withChapterNO:(NSUInteger)chapterNO;
 - (NSUInteger)indexOfViewController:(ZPDFPageController *)viewController;
 
 @end

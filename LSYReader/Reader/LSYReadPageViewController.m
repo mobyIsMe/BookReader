@@ -63,9 +63,11 @@
     [self.pageViewController setDataSource:pdfPageModel];
     
     NSInteger pageFromLocal = [[NSUserDefaults standardUserDefaults] integerForKey:[_fileName stringByAppendingString:@"page"]];
+    NSInteger chapterFromLocal = [[NSUserDefaults standardUserDefaults] integerForKey:[_fileName stringByAppendingString:@"chapter"]];
+        
     //setting initial VCs
     //int pageFromModel= _model.record.page;
-    ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(pageFromLocal, 1)];
+        ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(pageFromLocal, 1) withChapterNO:MAX(chapterFromLocal,1)];
     NSArray *viewControllers = @[initialViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
     [self.view addSubview:self.pageViewController.view];
@@ -181,9 +183,11 @@
     pageController.pdfDocument = pdfDocument;
     PDFDocumentOutlineItem* item = [self->pdfPageModel.items objectAtIndex:chapter];
     pageController.pageNO  = item.pageNumber;
+    pageController.chapterNO = chapter;
     [_pageViewController setViewControllers: @[pageController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self updateReadModelWithChapter:chapter page:pageController.pageNO];//更新选择目录时的页码
     [[NSUserDefaults standardUserDefaults] setInteger:pageController.pageNO forKey:[_fileName stringByAppendingString:@"page"]];
+    [[NSUserDefaults standardUserDefaults] setInteger:pageController.chapterNO forKey:[_fileName stringByAppendingString:@"chapter"]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
 
