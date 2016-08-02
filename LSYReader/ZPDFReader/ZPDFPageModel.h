@@ -15,7 +15,7 @@
 
 @class ZPDFPageController;
 
-@interface ZPDFPageModel : LSYReadModel <UIPageViewControllerDataSource>
+@interface ZPDFPageModel : NSObject  <UIPageViewControllerDataSource>
 {
     CGPDFDocumentRef pdfDocument;
     
@@ -23,9 +23,10 @@
 @property (nonatomic,strong) NSURL *resourceURL;
 @property int pageChanged;
 @property int chapterChanged;
-@property (nonatomic, strong) NSArray *items;
+//@property (nonatomic, strong) NSArray *items;
 @property (nonatomic, assign) id<ZPDFPageModelDelegate>delegate;
 @property (nonatomic, strong) NSString* fileName;
+@property (nonatomic,strong) LSYReadModel *model;
 -(id) initWithPDFDocument:(CGPDFDocumentRef) pdfDocument;
 
 - (ZPDFPageController *)viewControllerAtIndex:(NSUInteger)index withChapterNO:(NSUInteger)chapterNO;

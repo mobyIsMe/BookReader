@@ -19,5 +19,4 @@
  * 返回章节信息数组
  */
 +(NSMutableArray *)ePubFileHandle:(NSString *)path;
-+(NSMutableArray *)pdfFileHandle:(NSString *)path;
 @end

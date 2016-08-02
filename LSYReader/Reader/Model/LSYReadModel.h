@@ -24,7 +24,7 @@
 -(instancetype)initWithePub:(NSString *)ePubPath;
 //初始化PDF文件
 -(instancetype)initWithPDF:(NSString*)pdfPath;
-
+-(NSMutableArray*)getChapters:(NSArray*)chapterArray;
 +(void)updateLocalModel:(LSYReadModel *)readModel url:(NSURL *)url;
 +(id)getLocalModelWithURL:(NSURL *)url;
 @end

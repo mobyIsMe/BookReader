@@ -50,9 +50,16 @@ static  NSString *chapterCell = @"chapterCell";
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:chapterCell];
     }
     cell.textLabel.text = _readModel.chapters[indexPath.row].title;
-    if (indexPath.row == _readModel.record.chapter) {
-        [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    }
+   // if(![_readModel.content isEqualToString:@""]){
+        if (indexPath.row == _readModel.record.chapter) {//左边目录显示当前在哪一章
+            [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+   // }else{
+//        int  index = 
+//        [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+
+   // }
+    
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

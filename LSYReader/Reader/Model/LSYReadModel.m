@@ -8,6 +8,8 @@
 
 #import "LSYReadModel.h"
 #import"ZPDFPageModel.h"
+#import "PDFDocumentOutlineItem.h"
+#import"PDFDocumentOutline.h"
 @implementation LSYReadModel
 
 #pragma mark - 初始化TXT
@@ -45,17 +47,34 @@
 -(instancetype)initWithPDF:(NSString*)pdfPath{
     self = [super init];
     if (self) {
+        CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)[pdfPath lastPathComponent], NULL, (__bridge CFStringRef)@"files");
         
-        
-        _chapters = [LSYReadUtilites pdfFileHandle:pdfPath];;
+        CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
+        CFRelease(pdfURL);
+        //获取目录字典
+        NSArray *items = [[PDFDocumentOutline alloc]outlineItemsForDocument:pdfDocument];
+        _chapters = [self getChapters:items];
         _notes = [NSMutableArray array];
         _marks = [NSMutableArray array];
         _record = [[LSYRecordModel alloc] init];
         _record.chapterModel = _chapters.firstObject;
         _record.chapterCount = _chapters.count;
+        _content = @"";
     }
     return self;
 }
+
+-(NSMutableArray*)getChapters:(NSArray*)chapterArray{
+    NSMutableArray* chapters = [[NSMutableArray alloc]init];
+    for (PDFDocumentOutlineItem* element in chapterArray){
+        LSYChapterModel *model = [LSYChapterModel chapterWithPdf:element.title WithPageCount:element.pageNumber];
+        [chapters addObject:model];
+        
+    }
+    
+    return chapters;
+}
+
 
 #pragma mark -
 -(void)encodeWithCoder:(NSCoder *)aCoder{
@@ -110,13 +129,10 @@
         else if([[key pathExtension]
                  isEqualToString:@"pdf"]){
             NSLog(@"this is pdf");
-            
-            CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)[url lastPathComponent], NULL, (__bridge CFStringRef)@"files");
-            CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
-            CFRelease(pdfURL);
-            ZPDFPageModel *model = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
-             model.resource = url;
-             [LSYReadModel updateLocalModel:model url:url];
+            LSYReadModel *model = [[LSYReadModel alloc] initWithPDF:url];
+           // ZPDFPageModel *model = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
+            model.resource = url;
+            [LSYReadModel updateLocalModel:model url:url];
             return model;
         }
         else{

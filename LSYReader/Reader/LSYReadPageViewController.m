@@ -16,6 +16,7 @@
 #import "LSYMarkModel.h"
 #import "ZPDFReaderController.h"
 #import "ZPDFPageController.h"
+#import "ZPDFPageModel.h"
 #define AnimationDelay 0.3
 
 @interface LSYReadPageViewController ()<ZPDFPageModelDelegate,UIPageViewControllerDelegate,UIPageViewControllerDataSource,LSYMenuViewDelegate,UIGestureRecognizerDelegate,LSYCatalogViewControllerDelegate,LSYReadViewControllerDelegate>
@@ -58,21 +59,23 @@
     CFRelease(pdfURL);
     pdfPageModel = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
     pdfPageModel.delegate=self;
+    pdfPageModel.model = self.model;
     pdfPageModel.fileName = self.fileName;
-    pdfPageModel.resourceURL = _resourceURL;
+    pdfPageModel.resourceURL = self.resourceURL;
     [self.pageViewController setDataSource:pdfPageModel];
     
-    NSInteger pageFromLocal = [[NSUserDefaults standardUserDefaults] integerForKey:[_fileName stringByAppendingString:@"page"]];
-    NSInteger chapterFromLocal = [[NSUserDefaults standardUserDefaults] integerForKey:[_fileName stringByAppendingString:@"chapter"]];
+    //NSInteger pageFromLocal = [[NSUserDefaults standardUserDefaults] integerForKey:[_fileName stringByAppendingString:@"page"]];
+    //NSInteger chapterFromLocal = [[NSUserDefaults standardUserDefaults] integerForKey:[_fileName stringByAppendingString:@"chapter"]];
         
     //setting initial VCs
     //int pageFromModel= _model.record.page;
-        ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(pageFromLocal, 1) withChapterNO:MAX(chapterFromLocal,1)];
+        ZPDFPageController *initialViewController = [pdfPageModel viewControllerAtIndex:MAX(_model.record.page, 1) withChapterNO:_model.record.chapter];
     NSArray *viewControllers = @[initialViewController];
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionReverse animated:NO completion:nil];
     [self.view addSubview:self.pageViewController.view];
     [self addChildViewController:self.pageViewController];
-    _page = pageFromLocal;
+    //_page = pageFromLocal;
+        _page = _model.record.page;
 
    }else{
        
@@ -179,16 +182,17 @@
         //return nil;
     }
     // Create a new view controller and pass suitable data.
-    ZPDFPageController *pageController = [[ZPDFPageController alloc] init];
-    pageController.pdfDocument = pdfDocument;
-    PDFDocumentOutlineItem* item = [self->pdfPageModel.items objectAtIndex:chapter];
-    pageController.pageNO  = item.pageNumber;
-    pageController.chapterNO = chapter;
+    //ZPDFPageController *pageController = [[ZPDFPageController alloc] init];
+    LSYChapterModel* item = [_model.chapters objectAtIndex:chapter];
+    ZPDFPageController *pageController = [pdfPageModel viewControllerAtIndex:item.pageCount withChapterNO:chapter];
+    //pageController.pdfDocument = pdfDocument;
+        //pageController.pageNO  = item.pageCount;
+    //pageController.chapterNO = chapter;
     [_pageViewController setViewControllers: @[pageController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self updateReadModelWithChapter:chapter page:pageController.pageNO];//更新选择目录时的页码
-    [[NSUserDefaults standardUserDefaults] setInteger:pageController.pageNO forKey:[_fileName stringByAppendingString:@"page"]];
-    [[NSUserDefaults standardUserDefaults] setInteger:pageController.chapterNO forKey:[_fileName stringByAppendingString:@"chapter"]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    //[[NSUserDefaults standardUserDefaults] setInteger:pageController.pageNO forKey:[_fileName stringByAppendingString:@"page"]];
+    //[[NSUserDefaults standardUserDefaults] setInteger:pageController.chapterNO forKey:[_fileName stringByAppendingString:@"chapter"]];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
 
 
 }
