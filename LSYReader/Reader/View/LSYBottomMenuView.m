@@ -63,7 +63,7 @@
     }
     return _progressView;
 }
--(UISlider *)slider
+-(UISlider *)slider//滑动进度条
 {
     if (!_slider) {
         _slider = [[UISlider alloc] init];
@@ -73,7 +73,7 @@
         _slider.maximumTrackTintColor = [UIColor whiteColor];
         [_slider setThumbImage:[self thumbImage] forState:UIControlStateNormal];
         [_slider setThumbImage:[self thumbImage] forState:UIControlStateHighlighted];
-        [_slider addTarget:self action:@selector(changeMsg:) forControlEvents:UIControlEventValueChanged];
+        [_slider addTarget:self action:@selector(changeMsg:) forControlEvents:UIControlEventValueChanged];///滑块值改变时触发的方法
         [_slider addObserver:self forKeyPath:@"highlighted" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
         
     }
@@ -159,26 +159,41 @@
             return;
         }
         [LSYReadConfig shareInstance].fontSize++;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LSYFontNotification" object:@"increaseFont"];
+
     }
     else{
         if (floor([LSYReadConfig shareInstance].fontSize) == floor(MinFontSize)){
             return;
         }
         [LSYReadConfig shareInstance].fontSize--;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LSYFontNotification" object:@"decreaseFont"];
+
+    }
+    if(![_readModel.chapterModel.content isEqualToString:@""]){
+        if ([self.delegate respondsToSelector:@selector(menuViewFontSize:)]) {
+            [self.delegate menuViewFontSize:self];
+        }
     }
     
-    if ([self.delegate respondsToSelector:@selector(menuViewFontSize:)]) {
-        [self.delegate menuViewFontSize:self];
-    }
 }
-#pragma mark showMsg
+#pragma mark showMsg 拖动进度条查看章节
 
 -(void)changeMsg:(UISlider *)sender
 {
-    NSUInteger page =ceil((_readModel.chapterModel.pageCount-1)*sender.value/100.00);
-    if ([self.delegate respondsToSelector:@selector(menuViewJumpChapter:page:)]) {
-        [self.delegate menuViewJumpChapter:_readModel.chapter page:page];
+    if([_readModel.chapterModel.content isEqualToString:@""]){
+        NSUInteger chapterValue =ceil((_readModel.chapterCount-1)*(sender.value)/100);
+        if ([self.delegate respondsToSelector:@selector(menuViewJumpChapter:page:)]) {
+            [self.delegate menuViewJumpChapter:chapterValue page:0];
+        }
+
+    }else{
+        NSUInteger page =ceil((_readModel.chapterModel.pageCount-1)*sender.value/100.00);
+        if ([self.delegate respondsToSelector:@selector(menuViewJumpChapter:page:)]) {
+            [self.delegate menuViewJumpChapter:_readModel.chapter page:page];
+        }
     }
+    
     
     
 }
@@ -186,8 +201,14 @@
 {
     
     if ([keyPath isEqualToString:@"readModel.chapter"] || [keyPath isEqualToString:@"readModel.page"]) {
-        _slider.value = _readModel.page/((float)(_readModel.chapterModel.pageCount-1))*100;
+       
+        if([_readModel.chapterModel.content isEqualToString:@""]){
+            _slider.value = _readModel.chapter/((float)(_readModel.chapterCount-1))*100;
+        }else{
+            _slider.value = _readModel.page/((float)(_readModel.chapterModel.pageCount-1))*100;
+        }
         [_progressView title:_readModel.chapterModel.title progress:[NSString stringWithFormat:@"%.1f%%",_slider.value]];
+
     }
     else if ([keyPath isEqualToString:@"fontSize"]){
         _fontLabel.text = [NSString stringWithFormat:@"%d",(int)[LSYReadConfig shareInstance].fontSize];

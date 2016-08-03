@@ -189,7 +189,7 @@
         //pageController.pageNO  = item.pageCount;
     //pageController.chapterNO = chapter;
     [_pageViewController setViewControllers: @[pageController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    [self updateReadModelWithChapter:chapter page:pageController.pageNO];//更新选择目录时的页码
+    [self updateReadModelWithChapter:chapter page:item.pageCount];//更新选择目录时的页码
     //[[NSUserDefaults standardUserDefaults] setInteger:pageController.pageNO forKey:[_fileName stringByAppendingString:@"page"]];
     //[[NSUserDefaults standardUserDefaults] setInteger:pageController.chapterNO forKey:[_fileName stringByAppendingString:@"chapter"]];
     //[[NSUserDefaults standardUserDefaults] synchronize];
@@ -270,20 +270,38 @@
     [self catalogShowState:YES];
     
 }
-#pragma mark- 底部菜单栏跳往下一章
+#pragma mark- 底部菜单栏跳往下一章 上一章
 -(void)menuViewJumpChapter:(NSUInteger)chapter page:(NSUInteger)page
 {
-    [_pageViewController setViewControllers:@[[self readViewWithChapter:chapter page:page]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    [self updateReadModelWithChapter:chapter page:page];
+    if(!self.isPDF){
+        [_pageViewController setViewControllers:@[[self readViewWithChapter:chapter page:page]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        [self updateReadModelWithChapter:chapter page:page];
+    }else{
+        long pageSum = CGPDFDocumentGetNumberOfPages(pdfDocument);
+        if (pageSum== 0 || page >= pageSum+1) {//错误处理
+            //return nil;
+        }
+        LSYChapterModel* item = [_model.chapters objectAtIndex:chapter];
+        ZPDFPageController *pageController = [pdfPageModel viewControllerAtIndex:item.pageCount withChapterNO:chapter];
+        [_pageViewController setViewControllers: @[pageController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        [self updateReadModelWithChapter:chapter page:item.pageCount];
+    }
+    
+    
 }
 
 #pragma mark-底部菜单栏 改变字体大小
 -(void)menuViewFontSize:(LSYBottomMenuView *)bottomMenu
 {
-
-    [_model.record.chapterModel updateFont];
-    [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:(_model.record.page>_model.record.chapterModel.pageCount-1)?_model.record.chapterModel.pageCount-1:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    [self updateReadModelWithChapter:_model.record.chapter page:(_model.record.page>_model.record.chapterModel.pageCount-1)?_model.record.chapterModel.pageCount-1:_model.record.page];
+    if([_model.content isEqualToString:@""]){
+        //ZPDFPageController *pageController =  _pageViewController.presentedViewController;
+        //UIScrollView *scrollView = pageController.view;
+    }else{
+        [_model.record.chapterModel updateFont];
+        [_pageViewController setViewControllers:@[[self readViewWithChapter:_model.record.chapter page:(_model.record.page>_model.record.chapterModel.pageCount-1)?_model.record.chapterModel.pageCount-1:_model.record.page]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        [self updateReadModelWithChapter:_model.record.chapter page:(_model.record.page>_model.record.chapterModel.pageCount-1)?_model.record.chapterModel.pageCount-1:_model.record.page];
+    }
+    
 }
 -(void)menuViewMark:(LSYTopMenuView *)topMenu
 {
@@ -291,7 +309,18 @@
     LSYMarkModel *model = [[LSYMarkModel alloc] init];
     model.date = [NSDate date];
     model.recordModel = [_model.record copy];
-    [[_model mutableArrayValueForKey:@"marks"] addObject:model];
+    NSMutableSet* markSet;
+    if(markSet==nil){
+         markSet = [[NSMutableSet alloc]init];
+       for(LSYMarkModel* element in _model.marks){//书签去重
+        [markSet addObject:element.recordModel.chapterModel.title];
+       }
+    }
+    if(![markSet containsObject:model.recordModel.chapterModel.title]){
+        [[_model mutableArrayValueForKey:@"marks"] addObject:model];
+    }else{
+        
+    }
 
 }
 #pragma mark - Create Read View Controller

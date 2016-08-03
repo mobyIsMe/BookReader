@@ -67,7 +67,7 @@
     index--;
     
     if(_chapter>=1){
-         LSYChapterModel* itemTemp = self.model.chapters[_chapter-1];//本章的第一页的页码
+         LSYChapterModel* itemTemp = self.model.chapters[_chapter];//本章的第一页的页码
         if((index == itemTemp.pageCount-1)){
             _chapter--;
         }

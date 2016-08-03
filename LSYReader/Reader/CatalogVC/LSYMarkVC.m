@@ -54,10 +54,12 @@ static  NSString *markCell = @"markCell";
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:markCell];
     }
-    if([_readModel.content isEqualToString:@""]){
+    if([_readModel.content isEqualToString:@""]){//显示书签
         cell.textLabel.text = [[NSString  stringWithFormat:@"书签日期：%@",_readModel.marks[indexPath.row].date] substringToIndex:21];
     }else{
-        cell.textLabel.text = [_readModel.marks[indexPath.row].recordModel.chapterModel stringOfPage:_readModel.marks[indexPath.row].recordModel.page];
+//        cell.textLabel.text = [_readModel.marks[indexPath.row].recordModel.chapterModel stringOfPage:_readModel.marks[indexPath.row].recordModel.page];
+        cell.textLabel.text = [[NSString  stringWithFormat:@"书签日期：%@",_readModel.marks[indexPath.row].date] substringToIndex:21];
+
     }
     
     cell.detailTextLabel.text = _readModel.marks[indexPath.row].recordModel.chapterModel.title;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LSYReadView.h"
-@interface ZPDFView : LSYReadView {
+@interface ZPDFView : UIScrollView {
     CGPDFDocumentRef pdfDocument;
     int pageNO;
 }

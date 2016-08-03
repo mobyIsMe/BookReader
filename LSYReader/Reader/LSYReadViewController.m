@@ -28,10 +28,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeTheme:) name:LSYThemeNotification object:nil];
 }
 -(void)changeTheme:(NSNotification *)no
-{
+{   if(_readView.isPDF==NO){
     [LSYReadConfig shareInstance].theme = no.object;
     [self.view setBackgroundColor:[LSYReadConfig shareInstance].theme];
+    }
 }
+
 -(LSYReadView *)readView
 {
     if (!_readView) {

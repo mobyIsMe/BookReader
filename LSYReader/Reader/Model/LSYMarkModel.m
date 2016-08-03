@@ -17,12 +17,14 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.date forKey:@"date"];
     [aCoder encodeObject:self.recordModel forKey:@"recordModel"];
+    //[aCoder encodeObject:self.markSet forKey:@"markSet"];
 }
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self) {
         self.date = [aDecoder decodeObjectForKey:@"date"];
         self.recordModel = [aDecoder decodeObjectForKey:@"recordModel"];
+        //self.markSet  = [aDecoder decodeObjectForKey:@"markSet"];
     }
     return self;
 }
