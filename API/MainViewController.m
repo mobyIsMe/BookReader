@@ -99,10 +99,16 @@ NS_ENUM(NSInteger,CellState){
     [self.collectionView registerClass:[ReadCollectionCell class] forCellWithReuseIdentifier:kCollectionCellIdentifier];
     [self.view addSubview:self.collectionView];
     [self.collectionView reloadData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCover:) name:@"LSYCoverNotification" object:nil];
 
 }
 
-
+-(void)refreshCover:(NSNotification *)no{
+   NSString* resultStr = no.object;
+    if([resultStr isEqualToString:@"Success"]){
+        [self.collectionView reloadData];
+    }
+}
 
 #pragma mark UICollectionView data source.
 

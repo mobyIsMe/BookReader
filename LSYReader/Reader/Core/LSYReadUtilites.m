@@ -275,6 +275,8 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
     NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"cover_%@.png",imageName]];
+    //NSString *imagePath =[NSString stringWithFormat:@"cover_%@.png",imageName];
+    
     NSLog((@"pre writing to file"));
     if (![pngData writeToFile:imagePath atomically:NO])
     {
@@ -284,6 +286,8 @@
     else
     {
         NSLog(@"the cachedImagedPath is %@", imagePath);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LSYCoverNotification" object:@"Success"];
+
         return YES;
     }
     

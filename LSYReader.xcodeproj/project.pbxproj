@@ -17,11 +17,6 @@
 		5131FA461D4B9B5100D36166 /* JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5131FA451D4B9B5100D36166 /* JSONParser.m */; };
 		5131FA491D4E099700D36166 /* UIRemoveControlMinus.png in Resources */ = {isa = PBXBuildFile; fileRef = 5131FA471D4E099700D36166 /* UIRemoveControlMinus.png */; };
 		5131FA4A1D4E099700D36166 /* UIRemoveControlMinus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5131FA481D4E099700D36166 /* UIRemoveControlMinus@2x.png */; };
-		515501D81D2CEC65009E267F /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 515501CC1D2CEC65009E267F /* GMGridView.m */; };
-		515501D91D2CEC65009E267F /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 515501CF1D2CEC65009E267F /* GMGridViewCell.m */; };
-		515501DA1D2CEC65009E267F /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 515501D11D2CEC65009E267F /* GMGridViewLayoutStrategies.m */; };
-		515501DB1D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 515501D31D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.m */; };
-		515501DC1D2CEC65009E267F /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 515501D51D2CEC65009E267F /* UIView+GMGridViewAdditions.m */; };
 		515501E21D2CED42009E267F /* close_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 515501DF1D2CED42009E267F /* close_x.png */; };
 		515503431D2FD8A1009E267F /* AboutTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503411D2FD8A1009E267F /* AboutTabBar.m */; };
 		515503441D2FD8A1009E267F /* BookStoreTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503421D2FD8A1009E267F /* BookStoreTabBar.m */; };
@@ -109,18 +104,6 @@
 		5131FA451D4B9B5100D36166 /* JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONParser.m; sourceTree = "<group>"; };
 		5131FA471D4E099700D36166 /* UIRemoveControlMinus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIRemoveControlMinus.png; sourceTree = "<group>"; };
 		5131FA481D4E099700D36166 /* UIRemoveControlMinus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIRemoveControlMinus@2x.png"; sourceTree = "<group>"; };
-		515501CA1D2CEC65009E267F /* GMGridView-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridView-Constants.h"; sourceTree = "<group>"; };
-		515501CB1D2CEC65009E267F /* GMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridView.h; sourceTree = "<group>"; };
-		515501CC1D2CEC65009E267F /* GMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridView.m; sourceTree = "<group>"; };
-		515501CD1D2CEC65009E267F /* GMGridViewCell+Extended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridViewCell+Extended.h"; sourceTree = "<group>"; };
-		515501CE1D2CEC65009E267F /* GMGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewCell.h; sourceTree = "<group>"; };
-		515501CF1D2CEC65009E267F /* GMGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewCell.m; sourceTree = "<group>"; };
-		515501D01D2CEC65009E267F /* GMGridViewLayoutStrategies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewLayoutStrategies.h; sourceTree = "<group>"; };
-		515501D11D2CEC65009E267F /* GMGridViewLayoutStrategies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewLayoutStrategies.m; sourceTree = "<group>"; };
-		515501D21D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+GMGridViewAdditions.h"; sourceTree = "<group>"; };
-		515501D31D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
-		515501D41D2CEC65009E267F /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
-		515501D51D2CEC65009E267F /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
 		515501DF1D2CED42009E267F /* close_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_x.png; sourceTree = "<group>"; };
 		5155033F1D2FD833009E267F /* AboutTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTabBar.h; sourceTree = "<group>"; };
 		515503401D2FD86C009E267F /* BookStoreTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BookStoreTabBar.h; path = ../../BookStoreTabBar.h; sourceTree = "<group>"; };
@@ -301,25 +284,6 @@
 			path = Reader;
 			sourceTree = "<group>";
 		};
-		515501C91D2CEC65009E267F /* API */ = {
-			isa = PBXGroup;
-			children = (
-				515501CA1D2CEC65009E267F /* GMGridView-Constants.h */,
-				515501CB1D2CEC65009E267F /* GMGridView.h */,
-				515501CC1D2CEC65009E267F /* GMGridView.m */,
-				515501CD1D2CEC65009E267F /* GMGridViewCell+Extended.h */,
-				515501CE1D2CEC65009E267F /* GMGridViewCell.h */,
-				515501CF1D2CEC65009E267F /* GMGridViewCell.m */,
-				515501D01D2CEC65009E267F /* GMGridViewLayoutStrategies.h */,
-				515501D11D2CEC65009E267F /* GMGridViewLayoutStrategies.m */,
-				515501D21D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.h */,
-				515501D31D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.m */,
-				515501D41D2CEC65009E267F /* UIView+GMGridViewAdditions.h */,
-				515501D51D2CEC65009E267F /* UIView+GMGridViewAdditions.m */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
 		517331B51D35EF5A009089DE /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -458,7 +422,6 @@
 			isa = PBXGroup;
 			children = (
 				5155033F1D2FD833009E267F /* AboutTabBar.h */,
-				515501C91D2CEC65009E267F /* API */,
 				AB9A96B91CFC2EE80066030C /* LSYReader */,
 				AB9A96B81CFC2EE70066030C /* Products */,
 			);
@@ -701,7 +664,6 @@
 				ABE8ABDA1CFEBB7600693078 /* LSYTopMenuView.m in Sources */,
 				515503431D2FD8A1009E267F /* AboutTabBar.m in Sources */,
 				87D8BD381D0013CC0087D8DA /* LSYChapterVC.m in Sources */,
-				515501DB1D2CEC65009E267F /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				871E610B1D1252B20047AAFE /* CXMLElement_ElementTreeExtensions.m in Sources */,
 				5106EF411D23CB0400C33C11 /* ZPDFView.m in Sources */,
 				AB9A96EE1CFD27D90066030C /* LSYMarkModel.m in Sources */,
@@ -709,14 +671,12 @@
 				ABE8ABDD1CFEBB8300693078 /* LSYBottomMenuView.m in Sources */,
 				AB9A96D41CFC2F480066030C /* LSYReadPageViewController.m in Sources */,
 				517331BC1D363198009089DE /* BookModel.m in Sources */,
-				515501DC1D2CEC65009E267F /* UIView+GMGridViewAdditions.m in Sources */,
 				871E61081D1252B20047AAFE /* CXMLDocument_PrivateExtensions.m in Sources */,
 				87D8BD411D002C4E0087D8DA /* UIImage+ImageEffects.m in Sources */,
 				871E61041D1252B20047AAFE /* CXMLDocument_CreationExtensions.m in Sources */,
 				AB9A96F71CFD2EC70066030C /* LSYRecordModel.m in Sources */,
 				5106EF3E1D23CB0400C33C11 /* ZPDFPageController.m in Sources */,
 				871E610D1D1252B20047AAFE /* CXMLNode.m in Sources */,
-				515501D81D2CEC65009E267F /* GMGridView.m in Sources */,
 				871E61051D1252B20047AAFE /* CXMLNode_CreationExtensions.m in Sources */,
 				871E61CA1D1282B80047AAFE /* ioapi.c in Sources */,
 				871E61061D1252B20047AAFE /* CXHTMLDocument.m in Sources */,
@@ -728,7 +688,6 @@
 				AB9A96EB1CFD27C70066030C /* LSYReadModel.m in Sources */,
 				AB905C751D0D1BC400F3B2C9 /* LSYMagnifierView.m in Sources */,
 				AB9A96E71CFD25190066030C /* LSYReadUtilites.m in Sources */,
-				515501DA1D2CEC65009E267F /* GMGridViewLayoutStrategies.m in Sources */,
 				871E61CB1D1282B80047AAFE /* mztools.c in Sources */,
 				871E610E1D1252B20047AAFE /* CXMLNode_PrivateExtensions.m in Sources */,
 				ABE8ABD71CFEBB2400693078 /* LSYMenuView.m in Sources */,
@@ -738,7 +697,6 @@
 				AB9A96BC1CFC2EE80066030C /* main.m in Sources */,
 				871E61CE1D1282B80047AAFE /* ZipArchive.mm in Sources */,
 				AB9A96DE1CFC3A4D0066030C /* LSYReadConfig.m in Sources */,
-				515501D91D2CEC65009E267F /* GMGridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

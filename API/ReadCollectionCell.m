@@ -79,15 +79,18 @@
             //解压epub文件
             [LSYReadModel getLocalModelWithURL:[[NSBundle mainBundle] URLForResource:model.bookName withExtension:@"epub"]];
             coverimg = [UIImage imageWithContentsOfFile:[[NSUserDefaults standardUserDefaults]stringForKey:model.bookName]];
-        }
-        //如果解压目录下没有封面
-        if(coverimg==nil){
-            self.imageView.backgroundColor = [UIColor colorWithRed:20/255.0 green:155/255.0 blue:213/255.0 alpha:1.0];
-            self.txtSign.text = @"EPUB";
             
         }
         [self.txtBookName setHidden:YES];
         [self.txtSign setHidden:YES];
+
+        //如果解压目录下没有封面
+        if(coverimg==nil){
+            self.imageView.backgroundColor = [UIColor colorWithRed:20/255.0 green:155/255.0 blue:213/255.0 alpha:1.0];
+            self.txtSign.text = @"EPUB";
+            [self.txtBookName setHidden:NO];
+            [self.txtSign setHidden:NO];
+        }
     }
     //添加边框
     self.imageView.image = coverimg;
