@@ -59,34 +59,19 @@ static UIColor* themeChangeColor;
 }
 -(void)changeFont:(NSNotification *)no{///放大或减小视图
     NSString* fontStr = no.object;
-    CGRect zoomRect;
-    int scale ;
+    CGFloat scale;
     if([fontStr isEqualToString:@"increaseFont"]){
-        scale = _scrollView.zoomScale+1;
+        scale = _scrollView.zoomScale+0.2;
     }else{
-        scale = _scrollView.zoomScale-1;
+        scale = _scrollView.zoomScale-0.2;
     }
     
-//    zoomRect.size.height = _scrollView.frame.size.height/2;
-//    zoomRect.size.width  = _scrollView.frame.size.width /2;
-//    
-//    CGPoint* center;
-//    center->x =0;
-//    center->y =0;
-//    zoomRect.origin.x  = 0;
-//    zoomRect.origin.y  = 0;
-////    zoomRect.origin.x = (center->x * (2 - _scrollView.minimumZoomScale) - (zoomRect.size.width  / 2.0));
-////    zoomRect.origin.y = (center->y * (2 - _scrollView.minimumZoomScale) - (zoomRect.size.height / 2.0));
-//
-//    [_scrollView zoomToRect:zoomRect animated:NO];
-//    
-//    
-//    CGRect frame = _scrollView.frame;
-////    _pdfView.contentInset = UIEdgeInsetsMake(frame.size.height/2,
-////                                               frame.size.width/2,
-////                                               frame.size.height/2,
-////                                               frame.size.width/2);
-//    //_pdfView.contentSize = CGSizeMake(zoomRect.size.width, zoomRect.size.height );
+    CGFloat w= _pdfView.frame.size.width*scale;
+    CGFloat h= _pdfView.frame.size.height*scale;
+    
+    [_scrollView zoomToRect:CGRectMake(0, 0, w, h) animated:YES];
+    _pdfView.contentSize = CGSizeMake(_scrollView.bounds.size.width, _scrollView.bounds.size.height );
+    _pdfView.frame = CGRectMake(0, 0, w, h);
 }
 
     -(void)dealloc
