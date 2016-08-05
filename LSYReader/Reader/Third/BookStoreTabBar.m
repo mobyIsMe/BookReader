@@ -10,8 +10,13 @@
 #import "BookStoreTableViewCell.h"
 #import "JSONParser.h"
 #import "BookModel.h"
-@interface BookStoreTabBar ()
+#import "MJRefresh.h"
+#define REFRESH_URL @"http://stdl.qq.com/stdl/ipad/liteapp/novel1/list/"
 
+
+@interface BookStoreTabBar (){
+    int pageCount;
+}
 @end
 
 @implementation BookStoreTabBar
@@ -29,18 +34,49 @@
     UILabel* bookTab = [[UILabel alloc]initWithFrame:CGRectMake(self.view.bounds.size.width/2-40, 40, 80,80)];
     //bookTab.text = @"我是书城";
     [self.view addSubview:bookTab];
+    pageCount = 1;
+    _dataArr = [[NSMutableArray alloc]init];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    // Hide the time
+    //self.tableView.header.lastUpdatedTimeKey.hidden = YES;
+    [self.tableView.mj_header beginRefreshing];
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+
+    
+  
+}
+
+-(void)loadNewData{
     //联网下载书城数据
     //dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    [JSONParser fetchBookModelCompleteBlock:^(NSArray *dataarray,NSError *error){
+    NSString* pageStr = [NSString stringWithFormat:@"%d.json", pageCount];
+    NSString* dataURL = [REFRESH_URL stringByAppendingString: pageStr];
+    [JSONParser fetchBookModelWithURL:dataURL completeBlock:^(NSArray *dataarray,NSError *error){
         if(!error){
-            _dataArr = dataarray;
-           [self.tableView reloadData];
+            [_dataArr removeAllObjects];//书籍列表清空 加载第一页
+            [_dataArr addObjectsFromArray:dataarray];
+            [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
         }
-            
-}];
+        
+    }];
     //});
-    
-    
+}
+
+-(void)loadMoreData{
+    //联网下载书城数据
+    //dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    NSString* pageStr = [NSString stringWithFormat:@"%d.json", ++pageCount];
+    NSString* dataURL = [REFRESH_URL stringByAppendingString:pageStr];
+    [JSONParser fetchBookModelWithURL:dataURL completeBlock:^(NSArray *dataarray,NSError *error){
+        if(!error){
+            [_dataArr addObjectsFromArray:dataarray];
+            [self.tableView reloadData];
+            [self.tableView.mj_footer endRefreshing];
+        }
+        
+    }];
+    //});
 }
 
 //用来指定表视图的分区个数
@@ -68,7 +104,13 @@
         cell = [[BookStoreTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
     BookModel* item=_dataArr[indexPath.row];
-    cell.bookTitle.text = [[@"《" stringByAppendingString:item.bookName]stringByAppendingString:@"》"];
+    if(![cell.bookTitle.text hasPrefix:@"《"]){
+        cell.bookTitle.text = [[@"《" stringByAppendingString:item.bookName]stringByAppendingString:@"》"];
+
+    }else {
+        cell.bookTitle.text = item.bookName;
+
+    }
     cell.authorName.text = item.authorName;
     //[cell.downloadBtn ] = _dataArr[indexPath.row].bookSize;
     NSString *btnTitle = [NSString stringWithFormat:@"下载：%f MB",item.bookSize.floatValue/1024];

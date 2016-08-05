@@ -8,7 +8,6 @@
 
 #import "JSONParser.h"
 #import"BookModel.h"
-#define GET_URL @"http://stdl.qq.com/stdl/ipad/liteapp/novel1/list/1.json"
 
 @implementation JSONParser
 //+ (void)fetchBookModelcompleteBlock:(void(^)(NSArray* dataArray,NSError* error))block{
@@ -36,14 +35,20 @@
 
 //}
     
-+ (void)fetchBookModelCompleteBlock:(void(^)(NSArray *dataarray,NSError *error))block
-{
++ (void)fetchBookModelWithURL:(NSString *)dataURL completeBlock:(void(^)(NSArray *dataarray,NSError *error))block{
     __block NSMutableArray* bookModelArr = [[NSMutableArray alloc] init]; // 可变数组使用前必须进行初始化
     __block NSError *error;
-    NSURL *url = [[NSURL alloc] initWithString:GET_URL];
-    NSURLRequest *requst = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
-    [NSURLConnection sendAsynchronousRequest:requst queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response,  NSData *data, NSError *connectionError) {
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    NSURL *url = [[NSURL alloc] initWithString: dataURL];
+    
+    
+    
+    
+    
+    NSURLRequest* requst = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
+    
+    
+    [NSURLConnection sendAsynchronousRequest:requst queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
         NSNumber  *num = [dic valueForKey:@"datanum" ];
         long totalDataNum = [num floatValue];
         bookModelArr = [[NSMutableArray alloc]initWithCapacity:totalDataNum];
@@ -61,8 +66,7 @@
     }];
 }
 
-    
-    
+
     
 //    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
 //    

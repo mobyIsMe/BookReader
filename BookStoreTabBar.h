@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BookStoreTabBar : UITableViewController
-@property(nonatomic,strong)NSArray* dataArr;
+@property(nonatomic,strong)NSMutableArray* dataArr;
+@property(nonatomic,strong)NSString* dataURL;
 - (id) initBookStore;
 @end

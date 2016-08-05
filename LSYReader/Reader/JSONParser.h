@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BookModel.h"
 @interface JSONParser : NSObject
-//@property(nonatomic,copy)NSMutableArray* bookModelArr;
-+ (void)fetchBookModelCompleteBlock:(void(^)(NSArray *dataarray,NSError *error))block;
+@property(nonatomic,copy) __block NSString* bookStoreURL;
++ (void)fetchBookModelWithURL:(NSString *)dataURL completeBlock:(void(^)(NSArray *dataarray,NSError *error))block;
 @end
 
