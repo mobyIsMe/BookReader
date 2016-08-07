@@ -10,6 +10,7 @@
 #import"ZPDFPageModel.h"
 #import "PDFDocumentOutlineItem.h"
 #import"PDFDocumentOutline.h"
+#import "LSYReadUtilites.h"
 @implementation LSYReadModel
 
 #pragma mark - 初始化TXT
@@ -44,13 +45,15 @@
     return self;
 }
 #pragma mark - 初始化pdf
--(instancetype)initWithPDF:(NSString*)pdfPath{
+-(instancetype)initWithPDF:(NSURL*)pdfPath{
     self = [super init];
     if (self) {
-        CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)[pdfPath lastPathComponent], NULL, (__bridge CFStringRef)@"files");
-        
-        CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
-        CFRelease(pdfURL);
+//        CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)[pdfPath lastPathComponent], NULL, (__bridge CFStringRef)@"files");
+        //NSURL *url = [NSURL URLWithString:pdfPath];
+        //CFURLRef pdfURL = (__bridge CFURLRef)pdfPath;
+        CGPDFDocumentRef pdfDocument = [LSYReadUtilites pdfRefByFilePath:[pdfPath absoluteString]];
+        //CGPDFDocumentRef pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
+       // CFRelease(pdfURL);
         //获取目录字典
         NSArray *items = [[PDFDocumentOutline alloc]outlineItemsForDocument:pdfDocument];
         _chapters = [self getChapters:items];

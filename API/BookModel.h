@@ -22,6 +22,9 @@ typedef NS_ENUM(NSInteger, BookType) {
 @property(nonatomic,assign) BookType bookType;
 @property(nonatomic,copy) NSString *authorName;
 @property(nonatomic,copy) NSNumber* bookSize;
+@property(nonatomic,copy) NSString* bookID;
+@property(nonatomic,copy) NSString* downloadURL;
 @property Boolean isSelected;
+@property(nonatomic,copy)NSString* downloadState;//start, continue,done,代表下载的3种状态
 -(id)initWithDict:(NSDictionary*) dict;
 @end

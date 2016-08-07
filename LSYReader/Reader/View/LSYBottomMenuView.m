@@ -266,6 +266,7 @@
     [self removeObserver:self forKeyPath:@"readModel.chapter"];
     [self removeObserver:self forKeyPath:@"readModel.page"];
     [[LSYReadConfig shareInstance] removeObserver:self forKeyPath:@"fontSize"];
+    //[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end
 @interface LSYThemeView ()

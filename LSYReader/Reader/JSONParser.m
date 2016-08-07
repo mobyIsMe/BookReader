@@ -34,21 +34,30 @@
 //}];
 
 //}
+
+
     
 + (void)fetchBookModelWithURL:(NSString *)dataURL completeBlock:(void(^)(NSArray *dataarray,NSError *error))block{
     __block NSMutableArray* bookModelArr = [[NSMutableArray alloc] init]; // 可变数组使用前必须进行初始化
     __block NSError *error;
     NSURL *url = [[NSURL alloc] initWithString: dataURL];
-    
-    
-    
-    
-    
     NSURLRequest* requst = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
-    
-    
-    [NSURLConnection sendAsynchronousRequest:requst queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+   [NSURLConnection sendAsynchronousRequest:requst queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+       
+       if(dic==nil){//如果没有返回数据
+           NSString *domain = @"com.tencent.BookReader.ErrorDomain";
+           NSString *desc = @"No data returned";
+           NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+           
+           error = [NSError errorWithDomain:domain
+                                                code:-1
+                                            userInfo:userInfo];
+           
+       }
+       //保存版本号：version，数据总长度：datanum？
+       [[NSUserDefaults standardUserDefaults] setObject:[dic valueForKey:@"version" ]forKey:@"version"];
+
         NSNumber  *num = [dic valueForKey:@"datanum" ];
         long totalDataNum = [num floatValue];
         bookModelArr = [[NSMutableArray alloc]initWithCapacity:totalDataNum];
@@ -67,7 +76,6 @@
 }
 
 
-    
 //    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
 //    
 //    [request setHTTPMethod:@"GET"];

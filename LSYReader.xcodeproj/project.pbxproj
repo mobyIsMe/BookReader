@@ -23,15 +23,12 @@
 		515501E21D2CED42009E267F /* close_x.png in Resources */ = {isa = PBXBuildFile; fileRef = 515501DF1D2CED42009E267F /* close_x.png */; };
 		515503431D2FD8A1009E267F /* AboutTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503411D2FD8A1009E267F /* AboutTabBar.m */; };
 		515503441D2FD8A1009E267F /* BookStoreTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 515503421D2FD8A1009E267F /* BookStoreTabBar.m */; };
+		515E19971D57776C0036B84D /* BookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 515E19961D57776C0036B84D /* BookModel.m */; };
 		515F20C81D3904DB008FDFD9 /* PDFDocumentOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 515F20C71D3904DB008FDFD9 /* PDFDocumentOutline.m */; };
 		515F20CB1D3905EE008FDFD9 /* PDFDocumentOutlineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 515F20CA1D3905EE008FDFD9 /* PDFDocumentOutlineItem.m */; };
 		515F20CE1D390645008FDFD9 /* NSArray+GreatReaderAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 515F20CD1D390645008FDFD9 /* NSArray+GreatReaderAdditions.m */; };
-		517331BC1D363198009089DE /* BookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331B71D363198009089DE /* BookModel.m */; };
 		517331BD1D363198009089DE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331B91D363198009089DE /* MainViewController.m */; };
 		517331BE1D363198009089DE /* ReadCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 517331BB1D363198009089DE /* ReadCollectionCell.m */; };
-		517331C21D3670B5009089DE /* 细说明朝.epub in Resources */ = {isa = PBXBuildFile; fileRef = 517331BF1D3670B5009089DE /* 细说明朝.epub */; };
-		517331C31D3670B5009089DE /* 民调局异闻录.txt in Resources */ = {isa = PBXBuildFile; fileRef = 517331C01D3670B5009089DE /* 民调局异闻录.txt */; };
-		517331C41D3670B5009089DE /* Pride and Prejudice.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 517331C11D3670B5009089DE /* Pride and Prejudice.pdf */; };
 		871E61041D1252B20047AAFE /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 871E60E71D1252B20047AAFE /* CXMLDocument_CreationExtensions.m */; };
 		871E61051D1252B20047AAFE /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 871E60E91D1252B20047AAFE /* CXMLNode_CreationExtensions.m */; };
 		871E61061D1252B20047AAFE /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 871E60EB1D1252B20047AAFE /* CXHTMLDocument.m */; };
@@ -114,6 +111,7 @@
 		515503401D2FD86C009E267F /* BookStoreTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BookStoreTabBar.h; path = ../../BookStoreTabBar.h; sourceTree = "<group>"; };
 		515503411D2FD8A1009E267F /* AboutTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTabBar.m; sourceTree = "<group>"; };
 		515503421D2FD8A1009E267F /* BookStoreTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookStoreTabBar.m; path = Third/BookStoreTabBar.m; sourceTree = "<group>"; };
+		515E19961D57776C0036B84D /* BookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookModel.m; sourceTree = "<group>"; };
 		515F20C61D3904DB008FDFD9 /* PDFDocumentOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentOutline.h; sourceTree = "<group>"; };
 		515F20C71D3904DB008FDFD9 /* PDFDocumentOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFDocumentOutline.m; sourceTree = "<group>"; };
 		515F20C91D3905EE008FDFD9 /* PDFDocumentOutlineItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentOutlineItem.h; sourceTree = "<group>"; };
@@ -121,14 +119,10 @@
 		515F20CC1D390645008FDFD9 /* NSArray+GreatReaderAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+GreatReaderAdditions.h"; sourceTree = "<group>"; };
 		515F20CD1D390645008FDFD9 /* NSArray+GreatReaderAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+GreatReaderAdditions.m"; sourceTree = "<group>"; };
 		517331B61D363198009089DE /* BookModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookModel.h; sourceTree = "<group>"; };
-		517331B71D363198009089DE /* BookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookModel.m; sourceTree = "<group>"; };
 		517331B81D363198009089DE /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = ../API/MainViewController.h; sourceTree = "<group>"; };
 		517331B91D363198009089DE /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = ../API/MainViewController.m; sourceTree = "<group>"; };
 		517331BA1D363198009089DE /* ReadCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadCollectionCell.h; sourceTree = "<group>"; };
 		517331BB1D363198009089DE /* ReadCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadCollectionCell.m; sourceTree = "<group>"; };
-		517331BF1D3670B5009089DE /* 细说明朝.epub */ = {isa = PBXFileReference; lastKnownFileType = file; name = "细说明朝.epub"; path = "../../files/细说明朝.epub"; sourceTree = "<group>"; };
-		517331C01D3670B5009089DE /* 民调局异闻录.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "民调局异闻录.txt"; path = "../../files/民调局异闻录.txt"; sourceTree = "<group>"; };
-		517331C11D3670B5009089DE /* Pride and Prejudice.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Pride and Prejudice.pdf"; path = "../../files/Pride and Prejudice.pdf"; sourceTree = "<group>"; };
 		7854115291649A810D39F51E /* libPods-LSYReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LSYReader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		871E60E61D1252B20047AAFE /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
 		871E60E71D1252B20047AAFE /* CXMLDocument_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_CreationExtensions.m; sourceTree = "<group>"; };
@@ -309,8 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				517331B61D363198009089DE /* BookModel.h */,
-				517331B71D363198009089DE /* BookModel.m */,
 				517331BA1D363198009089DE /* ReadCollectionCell.h */,
+				515E19961D57776C0036B84D /* BookModel.m */,
 				517331BB1D363198009089DE /* ReadCollectionCell.m */,
 				5131FA3D1D4B6DA500D36166 /* BookStoreTableViewCell.h */,
 				5131FA3E1D4B6DA500D36166 /* BookStoreTableViewCell.m */,
@@ -566,9 +560,6 @@
 				ABE8ABE31CFED8CE00693078 /* reader_more@2x.png */,
 				ABE8ABDF1CFED88300693078 /* bg_back_white.png */,
 				ABE8ABE01CFED88300693078 /* bg_back_white@2x.png */,
-				517331BF1D3670B5009089DE /* 细说明朝.epub */,
-				517331C01D3670B5009089DE /* 民调局异闻录.txt */,
-				517331C11D3670B5009089DE /* Pride and Prejudice.pdf */,
 				87D8BD231CFFDB2E0087D8DA /* reader_cover@2x.png */,
 				ABE8ABE61D02A99300693078 /* r_drag-dot@2x.png */,
 				8726DA4A1D07FF830072323A /* bt_tjcp_no@2x.png */,
@@ -647,14 +638,11 @@
 			files = (
 				5131FA491D4E099700D36166 /* UIRemoveControlMinus.png in Resources */,
 				5131FA4A1D4E099700D36166 /* UIRemoveControlMinus@2x.png in Resources */,
-				517331C41D3670B5009089DE /* Pride and Prejudice.pdf in Resources */,
 				AB9A96CA1CFC2EE80066030C /* LaunchScreen.storyboard in Resources */,
 				8726DA4F1D0800A10072323A /* ic_add.png in Resources */,
 				5106EF341D23A0A000C33C11 /* files in Resources */,
 				5106EF451D24C8A600C33C11 /* back_nav@2x.png in Resources */,
 				515501E21D2CED42009E267F /* close_x.png in Resources */,
-				517331C31D3670B5009089DE /* 民调局异闻录.txt in Resources */,
-				517331C21D3670B5009089DE /* 细说明朝.epub in Resources */,
 				8726DA4B1D07FF830072323A /* bt_tjcp_no@2x.png in Resources */,
 				8726DA511D08021E0072323A /* sale_discount_yellow.png in Resources */,
 				ABE8ABE21CFED88300693078 /* bg_back_white@2x.png in Resources */,
@@ -730,6 +718,7 @@
 				87D8BD311CFFE68E0087D8DA /* LSYReadView.m in Sources */,
 				AB9A96D71CFC2F6C0066030C /* LSYReadViewController.m in Sources */,
 				871E61CC1D1282B80047AAFE /* unzip.c in Sources */,
+				515E19971D57776C0036B84D /* BookModel.m in Sources */,
 				AB9A96E11CFC3A6A0066030C /* LSYReadParser.m in Sources */,
 				5131FA3F1D4B6DA500D36166 /* BookStoreTableViewCell.m in Sources */,
 				5106EF3F1D23CB0400C33C11 /* ZPDFPageModel.m in Sources */,
@@ -753,7 +742,6 @@
 				AB9A96BF1CFC2EE80066030C /* AppDelegate.m in Sources */,
 				ABE8ABDD1CFEBB8300693078 /* LSYBottomMenuView.m in Sources */,
 				AB9A96D41CFC2F480066030C /* LSYReadPageViewController.m in Sources */,
-				517331BC1D363198009089DE /* BookModel.m in Sources */,
 				871E61081D1252B20047AAFE /* CXMLDocument_PrivateExtensions.m in Sources */,
 				87D8BD411D002C4E0087D8DA /* UIImage+ImageEffects.m in Sources */,
 				871E61041D1252B20047AAFE /* CXMLDocument_CreationExtensions.m in Sources */,

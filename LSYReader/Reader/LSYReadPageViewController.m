@@ -17,6 +17,7 @@
 #import "ZPDFReaderController.h"
 #import "ZPDFPageController.h"
 #import "ZPDFPageModel.h"
+#import"LSYReadUtilites.h"
 #define AnimationDelay 0.3
 
 @interface LSYReadPageViewController ()<ZPDFPageModelDelegate,UIPageViewControllerDelegate,UIPageViewControllerDataSource,LSYMenuViewDelegate,UIGestureRecognizerDelegate,LSYCatalogViewControllerDelegate,LSYReadViewControllerDelegate>
@@ -54,9 +55,9 @@
         
 
     //setting DataSource
-    CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)self.fileName, NULL, (__bridge CFStringRef)self.subDirName);
-    pdfDocument = CGPDFDocumentCreateWithURL((CFURLRef)pdfURL);
-    CFRelease(pdfURL);
+//    CFURLRef pdfURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), (__bridge CFStringRef)self.fileName, NULL, (__bridge CFStringRef)self.subDirName);
+    pdfDocument =  [LSYReadUtilites pdfRefByFilePath:[self.resourceURL absoluteString]];;
+   // CFRelease();
     pdfPageModel = [[ZPDFPageModel alloc] initWithPDFDocument:pdfDocument];
     pdfPageModel.delegate=self;
     pdfPageModel.model = self.model;
@@ -468,5 +469,8 @@
     pageController.pageNO  = pageNO;
     return pageController;
 }
+//-(void)dealloc{
+// [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 @end

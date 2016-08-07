@@ -22,6 +22,7 @@
 static NSInteger padding = 10;
 static NSInteger count = 3; // 每行三个
 static NSString *kCollectionCellIdentifier = @"CollectionCellIdentifier";
+
 NS_ENUM(NSInteger,CellState){
     
     //右上角编辑按钮的两种状态；
@@ -44,10 +45,10 @@ NS_ENUM(NSInteger,CellState){
 -(id) init{
     if(self = [super init]){
         self.dataArray = [[NSMutableArray alloc] init];
-        NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
-        
-        NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"files"];
-        
+//        NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
+//        
+//        NSString * documentsPath = [resourcePath stringByAppendingPathComponent:@"files"];
+        NSString *documentsPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject]stringByAppendingPathComponent:@"/files"];
         NSError * error;
         NSArray * fileNameLists = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentsPath error:&error];//获取书名列表
         // 生成数据
@@ -56,21 +57,27 @@ NS_ENUM(NSInteger,CellState){
             BookModel *bookModel = [[BookModel alloc] init];
             //bookModel.cover = @"cover.png";
             bookModel.bookName = [fileItem stringByDeletingPathExtension];
-            bookModel.filePath = [[NSBundle mainBundle] pathForResource:bookModel.bookName
-                                                                 ofType:[fileItem pathExtension]];
+//            bookModel.filePath = [[NSBundle mainBundle] pathForResource:bookModel.bookName
+//                                                                 ofType:[fileItem pathExtension]];
             
             if ([[fileItem pathExtension]isEqualToString:@"pdf"]) {
+                bookModel.filePath = [documentsPath stringByAppendingString:[NSString stringWithFormat:@"/%@.pdf",bookModel.bookName ]];
                 bookModel.bookType = BookTypePDF;
+                [self.dataArray addObject:bookModel];
             }else if([[fileItem pathExtension]isEqualToString:@"epub"]){
+                bookModel.filePath = [documentsPath stringByAppendingString:[NSString stringWithFormat:@"/%@.epub",bookModel.bookName ]];
                 bookModel.bookType = BookTypeEPUB;
                 NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                 NSString *documentsDirectory = [paths objectAtIndex:0];
                 bookModel.cover =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"cover_%@.png",bookModel.bookName]];
-            }else {
+                [self.dataArray addObject:bookModel];
+            }else if([[fileItem pathExtension]isEqualToString:@"txt"]) {
+                bookModel.filePath = [documentsPath stringByAppendingString:[NSString stringWithFormat:@"/%@.txt",bookModel.bookName ]];
                 bookModel.bookType = BookTypeTXT;
+                [self.dataArray addObject:bookModel];
             }
             
-            [self.dataArray addObject:bookModel];
+            
         }
     }
     
@@ -83,7 +90,7 @@ NS_ENUM(NSInteger,CellState){
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain
                                                                   target:self action:@selector(editBookShelf:)];
     self.navigationItem.rightBarButtonItem = editButton;
-   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newBookDownloaded:) name: @"NewBookDownloaded" object:nil];
     // collectionView 布局
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -103,6 +110,15 @@ NS_ENUM(NSInteger,CellState){
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCover:) name:@"LSYCoverNotification" object:nil];
 
 }
+
+-(void)newBookDownloaded:(NSNotification *)no{
+    NSString* result = no.object;
+    if([result isEqualToString:@"success"]){
+        [self init];
+        [self.collectionView reloadData];
+    }
+}
+
 
 -(void)refreshCover:(NSNotification *)no{
    NSString* resultStr = no.object;
@@ -139,9 +155,17 @@ NS_ENUM(NSInteger,CellState){
     ReadCollectionCell *cell = (ReadCollectionCell *)[sender superview];//获取cell
     
     NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];//获取cell对应的indexpath;
+    NSString* bookIDDones = [LSYReadUtilites getBookIDDone];
+    NSString* bookIDToDelete =[[self.dataArray objectAtIndex:indexpath.row] bookName];
+    if([bookIDDones containsString:bookIDToDelete]){
+        [bookIDDones stringByReplacingOccurrencesOfString:bookIDToDelete withString:@""];
+        [[NSUserDefaults standardUserDefaults] setObject:bookIDDones forKey:@"BookIDDone"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+    }
+   [LSYReadUtilites deleteFileWithFilePath:[[self.dataArray objectAtIndex:indexpath.row] filePath]];
     [self.dataArray removeObjectAtIndex:indexpath.row];
-    
-    [self.collectionView reloadData];
+        [self.collectionView reloadData];
     
 }  
 
@@ -152,19 +176,20 @@ NS_ENUM(NSInteger,CellState){
 {
     BookModel *bookModel = [self.dataArray objectAtIndex:indexPath.row];
     if(bookModel.isSelected==NO){
-        switch (bookModel.bookType) {
-            case BookTypePDF:
-                [self beginPDF:bookModel];
-                break;
-            case BookTypeTXT:
-                [self beginTXT:bookModel];
-                break;
-            case BookTypeEPUB:
-                [self beginEpub:bookModel];
-                break;
-            default:
-                break;
-        }
+        [self beginReading:bookModel];
+//        switch (bookModel.bookType) {
+//            case BookTypePDF:
+//                [self beginPDF:bookModel];
+//                break;
+//            case BookTypeTXT:
+//                [self beginTXT:bookModel];
+//                break;
+//            case BookTypeEPUB:
+//                [self beginEpub:bookModel];
+//                break;
+//            default:
+//                break;
+//        }
     }
     
 }
@@ -194,28 +219,6 @@ NS_ENUM(NSInteger,CellState){
       
    }
     
-//    //从正常状态变为可删除状态；
-//    if (CellState == NormalState) {
-//        
-//        CellState = DeleteState;
-//        self.navigationItem.rightBarButtonItem.title = @"完成";
-//        
-//        //循环遍历整个CollectionView；
-//        for(ReadCollectionCell *cell in self.collectionView.visibleCells){
-//            
-//            NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-//            
-//                [cell.deleteBtn setHidden:false];
-//            
-//        }
-//        
-//        
-//    }
-//    else if (CellState == DeleteState){
-//        
-//        CellState = NormalState;
-//        self.navigationItem.rightBarButtonItem.title = @"编辑";
-//    }  
     [self.collectionView reloadData];
     
 }  
@@ -243,13 +246,18 @@ NS_ENUM(NSInteger,CellState){
     return padding;
 }
 
-- (void) beginTXT:(BookModel*)bookModel {
-    LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
-    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"txt"];
-    
-    pageView.resourceURL = fileURL;    //文件位置
-    pageView.isPDF = NO;
 
+-(void) beginReading:(BookModel*)bookModel {
+    LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
+    //pageView.resourceURL = [NSURL URLWithString:bookModel.filePath];    //文件位置
+    pageView.resourceURL = [NSURL URLWithString:[bookModel.filePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];    //文件位置
+    if(bookModel.bookType!=BookTypePDF){
+        pageView.isPDF = NO;
+    }else{
+        pageView.isPDF = YES;
+        pageView.fileName = bookModel.bookName;
+    }
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         pageView.model = [LSYReadModel getLocalModelWithURL: pageView.resourceURL];
@@ -259,61 +267,62 @@ NS_ENUM(NSInteger,CellState){
             [self presentViewController:pageView animated:YES completion:nil];
         });
     });
-    
+
 }
-
--(void)beginEpub:(BookModel*)bookModel{
-    LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
-    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"epub"];
-    pageView.resourceURL = fileURL;    //文件位置
-    pageView.isPDF = NO;
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
-        pageView.model = [LSYReadModel getLocalModelWithURL:pageView.resourceURL];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self presentViewController:pageView animated:YES completion:nil];
-        });
-    });
-}
-
-
--(void)beginPDF:(BookModel*)bookModel{
-    //开始跳转PDF阅读页
-//    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"pdf"];
-//    ZPDFReaderController *targetViewCtrl = [[ZPDFReaderController alloc] init];
-//    targetViewCtrl.fileName = [fileURL lastPathComponent];
-//    targetViewCtrl.subDirName=@"files";
+//- (void) beginTXT:(BookModel*)bookModel {
+//    LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
+//   // NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"txt"];
 //    
+//    pageView.resourceURL = [NSURL URLWithString:bookModel.filePath];    //文件位置
+//    pageView.isPDF = NO;
+//
 //    dispatch_async(dispatch_get_global_queue(0, 0), ^{
 //        
-//        //pageView.model = [LSYReadModel getLocalModelWithURL:fileURL];
+//        pageView.model = [LSYReadModel getLocalModelWithURL: pageView.resourceURL];
 //        
 //        dispatch_async(dispatch_get_main_queue(), ^{
 //            
-//            //暂时添加导航栏
-//            UINavigationController* nav = [[UINavigationController alloc]initWithRootViewController:targetViewCtrl];
-//            [self presentViewController:nav animated:YES completion:nil];
-//            
+//            [self presentViewController:pageView animated:YES completion:nil];
 //        });
 //    });
-    
-    LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
-    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"pdf"];
-    pageView.resourceURL = fileURL;    //文件位置
-    pageView.fileName = [fileURL lastPathComponent];
-    pageView.subDirName=@"files";
-    pageView.isPDF = YES;
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
-        pageView.model = [LSYReadModel getLocalModelWithURL:pageView.resourceURL];//这个model存储了归档的阅读参数：进度（chapter、page），笔记，背景主题，字体大小
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self presentViewController:pageView animated:YES completion:nil];
-        });
-    });
-    
-}
+//    
+//}
+
+//-(void)beginEpub:(BookModel*)bookModel{
+//    LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
+//   // NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"epub"];
+//    pageView.resourceURL = [NSURL URLWithString:[bookModel.filePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding ]];    //文件位置
+//    pageView.isPDF = NO;
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        
+//        pageView.model = [LSYReadModel getLocalModelWithURL:pageView.resourceURL];
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self presentViewController:pageView animated:YES completion:nil];
+//        });
+//    });
+//}
+
+
+//-(void)beginPDF:(BookModel*)bookModel{
+//    //开始跳转PDF阅读页
+//    LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
+//    //NSURL *fileURL = [[NSBundle mainBundle] URLForResource:bookModel.bookName withExtension:@"pdf"];
+////    NSURL* fileURL = [NSURL URLWithString:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject]stringByAppendingPathComponent:[@"/files"stringByAppendingString:[NSString stringWithFormat:@"%@.pdf",bookModel.bookName ]]]];
+//    pageView.resourceURL = [NSURL URLWithString:bookModel.filePath];    //文件位置
+//    pageView.fileName = bookModel.bookName;
+//    //pageView.subDirName=@"files";
+//    pageView.isPDF = YES;
+//    
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        
+//        pageView.model = [LSYReadModel getLocalModelWithURL:pageView.resourceURL];//这个model存储了归档的阅读参数：进度（chapter、page），笔记，背景主题，字体大小
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self presentViewController:pageView animated:YES completion:nil];
+//        });
+//    });
+//    
+//}
 
 @end

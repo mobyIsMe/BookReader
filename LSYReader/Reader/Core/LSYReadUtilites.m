@@ -13,6 +13,61 @@
 #import "PDFDocumentOutline.h"
 #import "PDFDocumentOutlineItem.h"
 @implementation LSYReadUtilites
+
+//删除文件夹下的文件
+// 删除沙盒里的文件
++(void)deleteFileWithFilePath:(NSString*)filePath {
+//    NSString *resourcePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject]stringByAppendingPathComponent:@"/files"];
+//    _model.filePath = [resourcePath stringByAppendingString:[@"/" stringByAppendingString:[_model.downloadURL lastPathComponent]]];
+    NSFileManager* fileManager=[NSFileManager defaultManager];
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    //文件名
+    //NSString *uniquePath=[[paths objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:filePath];
+    if (!blHave) {
+        NSLog(@"no  have");
+        return ;
+    }else {
+        NSLog(@" have");
+        BOOL blDele= [fileManager removeItemAtPath:filePath error:nil];
+        if (blDele) {
+            NSLog(@"dele success");
+        }else {
+            NSLog(@"dele fail");
+        }
+    }
+}
+
+//获取本地的PDF文件
++(CGPDFDocumentRef)pdfRefByFilePath:(NSString *)aFilePath
+{
+    CFStringRef path;
+    CFURLRef url;
+    CGPDFDocumentRef document;
+    
+    path = CFStringCreateWithCString(NULL, [aFilePath UTF8String], kCFStringEncodingUTF8);
+    url = CFURLCreateWithFileSystemPath(NULL, path, kCFURLPOSIXPathStyle, NO);
+    document = CGPDFDocumentCreateWithURL(url);
+    
+    CFRelease(path);
+    CFRelease(url);
+    
+    return document;
+}
++(NSString*)getBookIDDone{
+    if(bookIDDones ==nil){
+    bookIDDones = [[NSUserDefaults standardUserDefaults] stringForKey:@"BookIDDone"];
+    }
+    return bookIDDones;
+}
+
++(NSString*)getBookIDContinue{
+    if(bookIDContinues ==nil){
+    bookIDContinues = [[NSUserDefaults standardUserDefaults] stringForKey:@"BookIDContinue"];
+    }
+    return bookIDContinues;
+}
+
 +(void)separateChapter:(NSMutableArray **)chapters content:(NSString *)content
 {
     [*chapters removeAllObjects];
@@ -292,4 +347,8 @@
     }
     
 }
+
+//-(void)dealloc{
+// [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 @end

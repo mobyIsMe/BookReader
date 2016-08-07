@@ -8,7 +8,7 @@
 
 #import "ReadCollectionCell.h"
 #import "BookModel.h"
-
+#import "LSYReadUtilites.h"
 @implementation ReadCollectionCell
 
 - (id)initWithFrame:(CGRect)frame
@@ -61,8 +61,10 @@
     UIImage *coverimg = nil;
     if(model.bookType == BookTypePDF){
         self.imageView.backgroundColor = [UIColor whiteColor];
-        NSString* fileStr  = [[NSBundle mainBundle] pathForResource:model.bookName ofType:@"pdf"];
-        CGPDFDocumentRef pdfDocumentRef = [self pdfRefByFilePath:fileStr];
+        //NSString* fileStr  = [[NSBundle mainBundle] pathForResource:model.bookName ofType:@"pdf"];
+        //这个fileStr是文件的文章的完整路径，包括扩展名
+        NSString *fileStr = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject]stringByAppendingPathComponent:[@"/files"stringByAppendingString:[NSString stringWithFormat:@"%@.pdf",model.bookName ]]];
+        CGPDFDocumentRef pdfDocumentRef = [LSYReadUtilites pdfRefByFilePath:fileStr];
         coverimg  = [self imageFromPDFWithDocumentRef:pdfDocumentRef];
         [self.txtBookName setHidden:YES];
         [self.txtSign setHidden:YES];
@@ -73,11 +75,13 @@
         [self.txtSign setHidden:NO];
 
         
-    }else{
+    }else if(model.bookType==BookTypeEPUB){
         coverimg = [UIImage imageWithContentsOfFile:model.cover];
         if(coverimg==nil){//如果没有封面，就解压文件
             //解压epub文件
-            [LSYReadModel getLocalModelWithURL:[[NSBundle mainBundle] URLForResource:model.bookName withExtension:@"epub"]];
+            NSString *fileStr = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject]stringByAppendingPathComponent:[@"/files"stringByAppendingString:[NSString stringWithFormat:@"%@.epub",model.bookName ]]];
+//            [LSYReadModel getLocalModelWithURL:[[NSBundle mainBundle] URLForResource:model.bookName withExtension:@"epub"]];
+            [LSYReadModel getLocalModelWithURL:[NSURL URLWithString:fileStr]];
             coverimg = [UIImage imageWithContentsOfFile:[[NSUserDefaults standardUserDefaults]stringForKey:model.bookName]];
             
         }
@@ -132,21 +136,6 @@
 }
 
 
-//获取本地的PDF文件
-- (CGPDFDocumentRef)pdfRefByFilePath:(NSString *)aFilePath
-{
-    CFStringRef path;
-    CFURLRef url;
-    CGPDFDocumentRef document;
-    
-    path = CFStringCreateWithCString(NULL, [aFilePath UTF8String], kCFStringEncodingUTF8);
-    url = CFURLCreateWithFileSystemPath(NULL, path, kCFURLPOSIXPathStyle, NO);
-    document = CGPDFDocumentCreateWithURL(url);
-    
-    CFRelease(path);
-    CFRelease(url);
-    
-    return document;
-}
+
 
 @end

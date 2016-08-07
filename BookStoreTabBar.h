@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface BookStoreTabBar : UITableViewController
+#import "BookStoreTableViewCell.h"
+@interface BookStoreTabBar : UITableViewController<StartReadAfterDownloadDelegate>
 @property(nonatomic,strong)NSMutableArray* dataArr;
 @property(nonatomic,strong)NSString* dataURL;
+
 - (id) initBookStore;
 @end
