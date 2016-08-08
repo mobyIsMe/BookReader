@@ -288,7 +288,8 @@
         [_pageViewController setViewControllers: @[pageController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
         [self updateReadModelWithChapter:chapter page:item.pageCount];
     }
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BookMarkReset" object:@"success"];
+
     
 }
 
