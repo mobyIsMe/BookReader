@@ -62,9 +62,8 @@
     if(model.bookType == BookTypePDF){
         self.imageView.backgroundColor = [UIColor whiteColor];
         //NSString* fileStr  = [[NSBundle mainBundle] pathForResource:model.bookName ofType:@"pdf"];
-        //这个fileStr是文件的文章的完整路径，包括扩展名
-        NSString *fileStr = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject]stringByAppendingPathComponent:[@"/files"stringByAppendingString:[NSString stringWithFormat:@"%@.pdf",model.bookName ]]];
-        CGPDFDocumentRef pdfDocumentRef = [LSYReadUtilites pdfRefByFilePath:fileStr];
+
+        CGPDFDocumentRef pdfDocumentRef = [LSYReadUtilites pdfRefByFilePath:model.filePath];
         coverimg  = [self imageFromPDFWithDocumentRef:pdfDocumentRef];
         [self.txtBookName setHidden:YES];
         [self.txtSign setHidden:YES];
