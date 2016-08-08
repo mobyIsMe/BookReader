@@ -16,7 +16,8 @@
 
 - (id) initAbout{
     if(self = [super init]){
-        self.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"关于" image:nil tag:3];
+//        self.title = @"关于";
+//        self.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"关于" image:nil tag:3];
     }
     return self;
 }

@@ -26,7 +26,18 @@
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
     [self addSubview:self.back];
     [self addSubview:self.more];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetBookMarks:) name:@"BookMarkReset" object:nil];
 }
+
+-(void)resetBookMarks:(NSNotification *)no
+{
+    NSString *result = no.object;
+    if([result isEqualToString:@"success"]){
+        [_more setImage:[UIImage imageNamed:@"RibbonOff"] forState:UIControlStateNormal];
+
+    }
+}
+
 -(UIButton *)back
 {
     if (!_back) {
@@ -39,17 +50,25 @@
 {
     if (!_more) {
         _more = [LSYReadUtilites commonButtonSEL:@selector(moreOption) target:self];
-        [_more setImage:[UIImage imageNamed:@"sale_discount_yellow"] forState:UIControlStateNormal];
+        [_more setImage:[UIImage imageNamed:@"RibbonOff"] forState:UIControlStateNormal];
         [_more setImageEdgeInsets:UIEdgeInsetsMake(7.5, 12.5, 7.5, 12.5)];
     }
     return _more;
 }
 -(void)moreOption
 {
+    Boolean isSuccess;
     if ([self.delegate respondsToSelector:@selector(menuViewMark:)]) {
-        [self.delegate menuViewMark:self];
+        isSuccess = [self.delegate menuViewMark:self];
     }
-    [LSYReadUtilites showAlertTitle:nil content:@"保存书签成功"];
+    if(isSuccess){
+        [LSYReadUtilites showAlertTitle:nil content:@"保存书签成功"];
+        [_more setImage:[UIImage imageNamed:@"RibbonOn"] forState:UIControlStateNormal];
+        
+    }else{
+        [LSYReadUtilites showAlertTitle:nil content:@"去除书签成功"];
+        [_more setImage:[UIImage imageNamed:@"RibbonOff"] forState:UIControlStateNormal];
+    }
 }
 -(void)backView
 {

@@ -263,6 +263,7 @@
 {
     _showBar = YES;
     [self setNeedsStatusBarAppearanceUpdate];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BookMarkReset" object:@"success"];
     
 }
 -(void)menuViewInvokeCatalog:(LSYBottomMenuView *)bottomMenu
@@ -304,7 +305,7 @@
     }
     
 }
--(void)menuViewMark:(LSYTopMenuView *)topMenu
+-(Boolean)menuViewMark:(LSYTopMenuView *)topMenu
 {
 
     LSYMarkModel *model = [[LSYMarkModel alloc] init];
@@ -313,16 +314,17 @@
     NSMutableSet* markSet;
     if(markSet==nil){
          markSet = [[NSMutableSet alloc]init];
-       for(LSYMarkModel* element in _model.marks){//书签去重
+       for(LSYMarkModel* element in _model.marks){//书签去重，取出所有的书签
         [markSet addObject:element.recordModel.chapterModel.title];
        }
     }
     if(![markSet containsObject:model.recordModel.chapterModel.title]){
         [[_model mutableArrayValueForKey:@"marks"] addObject:model];
+        return YES;
     }else{
-        
+        [[_model mutableArrayValueForKey:@"marks"] removeObject:model];
     }
-
+    return NO;
 }
 #pragma mark - Create Read View Controller
 

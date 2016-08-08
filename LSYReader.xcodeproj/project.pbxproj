@@ -16,6 +16,11 @@
 		5106EF401D23CB0400C33C11 /* ZPDFReaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5106EF3B1D23CB0400C33C11 /* ZPDFReaderController.m */; };
 		5106EF411D23CB0400C33C11 /* ZPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5106EF3D1D23CB0400C33C11 /* ZPDFView.m */; };
 		5106EF451D24C8A600C33C11 /* back_nav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5106EF441D24C8A600C33C11 /* back_nav@2x.png */; };
+		512E56711D58897200D5E184 /* Brightness@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 512E56701D58897200D5E184 /* Brightness@2x.png */; };
+		512E56731D58898100D5E184 /* Documents@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 512E56721D58898100D5E184 /* Documents@2x.png */; };
+		512E56751D588AFB00D5E184 /* reader_cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 512E56741D588AFB00D5E184 /* reader_cover@2x.png */; };
+		512E56781D58925900D5E184 /* RibbonOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 512E56761D58925900D5E184 /* RibbonOff@2x.png */; };
+		512E56791D58925900D5E184 /* RibbonOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 512E56771D58925900D5E184 /* RibbonOn@2x.png */; };
 		5131FA3F1D4B6DA500D36166 /* BookStoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5131FA3E1D4B6DA500D36166 /* BookStoreTableViewCell.m */; };
 		5131FA461D4B9B5100D36166 /* JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5131FA451D4B9B5100D36166 /* JSONParser.m */; };
 		5131FA491D4E099700D36166 /* UIRemoveControlMinus.png in Resources */ = {isa = PBXBuildFile; fileRef = 5131FA471D4E099700D36166 /* UIRemoveControlMinus.png */; };
@@ -54,7 +59,6 @@
 		8726DA4B1D07FF830072323A /* bt_tjcp_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8726DA4A1D07FF830072323A /* bt_tjcp_no@2x.png */; };
 		8726DA4F1D0800A10072323A /* ic_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 8726DA4E1D0800A10072323A /* ic_add.png */; };
 		8726DA511D08021E0072323A /* sale_discount_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8726DA501D08021E0072323A /* sale_discount_yellow.png */; };
-		87D8BD241CFFDB2E0087D8DA /* reader_cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 87D8BD231CFFDB2E0087D8DA /* reader_cover@2x.png */; };
 		87D8BD2B1CFFE5100087D8DA /* LSYViewPagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D8BD2A1CFFE5100087D8DA /* LSYViewPagerVC.m */; };
 		87D8BD2E1CFFE5880087D8DA /* LSYCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D8BD2D1CFFE5880087D8DA /* LSYCatalogViewController.m */; };
 		87D8BD311CFFE68E0087D8DA /* LSYReadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D8BD301CFFE68E0087D8DA /* LSYReadView.m */; };
@@ -100,6 +104,11 @@
 		5106EF3C1D23CB0400C33C11 /* ZPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZPDFView.h; sourceTree = "<group>"; };
 		5106EF3D1D23CB0400C33C11 /* ZPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZPDFView.m; sourceTree = "<group>"; };
 		5106EF441D24C8A600C33C11 /* back_nav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_nav@2x.png"; sourceTree = "<group>"; };
+		512E56701D58897200D5E184 /* Brightness@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Brightness@2x.png"; sourceTree = "<group>"; };
+		512E56721D58898100D5E184 /* Documents@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Documents@2x.png"; sourceTree = "<group>"; };
+		512E56741D588AFB00D5E184 /* reader_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reader_cover@2x.png"; sourceTree = "<group>"; };
+		512E56761D58925900D5E184 /* RibbonOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RibbonOff@2x.png"; sourceTree = "<group>"; };
+		512E56771D58925900D5E184 /* RibbonOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RibbonOn@2x.png"; sourceTree = "<group>"; };
 		5131FA3D1D4B6DA500D36166 /* BookStoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookStoreTableViewCell.h; sourceTree = "<group>"; };
 		5131FA3E1D4B6DA500D36166 /* BookStoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookStoreTableViewCell.m; sourceTree = "<group>"; };
 		5131FA441D4B9B5100D36166 /* JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
@@ -109,7 +118,7 @@
 		515501DF1D2CED42009E267F /* close_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_x.png; sourceTree = "<group>"; };
 		5155033F1D2FD833009E267F /* AboutTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutTabBar.h; sourceTree = "<group>"; };
 		515503401D2FD86C009E267F /* BookStoreTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BookStoreTabBar.h; path = ../../BookStoreTabBar.h; sourceTree = "<group>"; };
-		515503411D2FD8A1009E267F /* AboutTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutTabBar.m; sourceTree = "<group>"; };
+		515503411D2FD8A1009E267F /* AboutTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutTabBar.m; path = Reader/Third/AboutTabBar.m; sourceTree = "<group>"; };
 		515503421D2FD8A1009E267F /* BookStoreTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookStoreTabBar.m; path = Third/BookStoreTabBar.m; sourceTree = "<group>"; };
 		515E19961D57776C0036B84D /* BookModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookModel.m; sourceTree = "<group>"; };
 		515F20C61D3904DB008FDFD9 /* PDFDocumentOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFDocumentOutline.h; sourceTree = "<group>"; };
@@ -173,7 +182,6 @@
 		8726DA4A1D07FF830072323A /* bt_tjcp_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bt_tjcp_no@2x.png"; path = "../View/bt_tjcp_no@2x.png"; sourceTree = "<group>"; };
 		8726DA4E1D0800A10072323A /* ic_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_add.png; sourceTree = "<group>"; };
 		8726DA501D08021E0072323A /* sale_discount_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sale_discount_yellow.png; sourceTree = "<group>"; };
-		87D8BD231CFFDB2E0087D8DA /* reader_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reader_cover@2x.png"; sourceTree = "<group>"; };
 		87D8BD291CFFE5100087D8DA /* LSYViewPagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYViewPagerVC.h; sourceTree = "<group>"; };
 		87D8BD2A1CFFE5100087D8DA /* LSYViewPagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSYViewPagerVC.m; sourceTree = "<group>"; };
 		87D8BD2C1CFFE5880087D8DA /* LSYCatalogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSYCatalogViewController.h; sourceTree = "<group>"; };
@@ -402,7 +410,6 @@
 		87D8BD281CFFE5100087D8DA /* Third */ = {
 			isa = PBXGroup;
 			children = (
-				515503411D2FD8A1009E267F /* AboutTabBar.m */,
 				871E61BD1D1282B80047AAFE /* ZipArchive */,
 				871E60E31D1252B20047AAFE /* TouchXML */,
 				AB9A96E51CFD25190066030C /* LSYReadUtilites.h */,
@@ -423,6 +430,8 @@
 		87D8BD321D00137A0087D8DA /* CatalogVC */ = {
 			isa = PBXGroup;
 			children = (
+				512E56761D58925900D5E184 /* RibbonOff@2x.png */,
+				512E56771D58925900D5E184 /* RibbonOn@2x.png */,
 				87D8BD361D0013CC0087D8DA /* LSYChapterVC.h */,
 				87D8BD371D0013CC0087D8DA /* LSYChapterVC.m */,
 				87D8BD391D0013DF0087D8DA /* LSYNoteVC.h */,
@@ -462,6 +471,7 @@
 				5131FA431D4B9B1D00D36166 /* NetWork */,
 				AB9A96D11CFC2F1F0066030C /* Reader */,
 				AB9A96BD1CFC2EE80066030C /* AppDelegate.h */,
+				515503411D2FD8A1009E267F /* AboutTabBar.m */,
 				517331B81D363198009089DE /* MainViewController.h */,
 				517331B91D363198009089DE /* MainViewController.m */,
 				AB9A96BE1CFC2EE80066030C /* AppDelegate.m */,
@@ -555,12 +565,14 @@
 		ABE8ABDE1CFED82600693078 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				512E56721D58898100D5E184 /* Documents@2x.png */,
 				8726DA501D08021E0072323A /* sale_discount_yellow.png */,
+				512E56701D58897200D5E184 /* Brightness@2x.png */,
 				8726DA4E1D0800A10072323A /* ic_add.png */,
+				512E56741D588AFB00D5E184 /* reader_cover@2x.png */,
 				ABE8ABE31CFED8CE00693078 /* reader_more@2x.png */,
 				ABE8ABDF1CFED88300693078 /* bg_back_white.png */,
 				ABE8ABE01CFED88300693078 /* bg_back_white@2x.png */,
-				87D8BD231CFFDB2E0087D8DA /* reader_cover@2x.png */,
 				ABE8ABE61D02A99300693078 /* r_drag-dot@2x.png */,
 				8726DA4A1D07FF830072323A /* bt_tjcp_no@2x.png */,
 			);
@@ -636,20 +648,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				512E56751D588AFB00D5E184 /* reader_cover@2x.png in Resources */,
 				5131FA491D4E099700D36166 /* UIRemoveControlMinus.png in Resources */,
 				5131FA4A1D4E099700D36166 /* UIRemoveControlMinus@2x.png in Resources */,
 				AB9A96CA1CFC2EE80066030C /* LaunchScreen.storyboard in Resources */,
 				8726DA4F1D0800A10072323A /* ic_add.png in Resources */,
 				5106EF341D23A0A000C33C11 /* files in Resources */,
+				512E56731D58898100D5E184 /* Documents@2x.png in Resources */,
 				5106EF451D24C8A600C33C11 /* back_nav@2x.png in Resources */,
 				515501E21D2CED42009E267F /* close_x.png in Resources */,
 				8726DA4B1D07FF830072323A /* bt_tjcp_no@2x.png in Resources */,
 				8726DA511D08021E0072323A /* sale_discount_yellow.png in Resources */,
+				512E56781D58925900D5E184 /* RibbonOff@2x.png in Resources */,
 				ABE8ABE21CFED88300693078 /* bg_back_white@2x.png in Resources */,
+				512E56791D58925900D5E184 /* RibbonOn@2x.png in Resources */,
 				ABE8ABE71D02A99300693078 /* r_drag-dot@2x.png in Resources */,
 				AB9A96C71CFC2EE80066030C /* Assets.xcassets in Resources */,
 				ABE8ABE41CFED8CE00693078 /* reader_more@2x.png in Resources */,
-				87D8BD241CFFDB2E0087D8DA /* reader_cover@2x.png in Resources */,
+				512E56711D58897200D5E184 /* Brightness@2x.png in Resources */,
 				ABE8ABE11CFED88300693078 /* bg_back_white.png in Resources */,
 				AB9A96C51CFC2EE80066030C /* Main.storyboard in Resources */,
 			);

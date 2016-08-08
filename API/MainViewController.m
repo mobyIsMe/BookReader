@@ -84,11 +84,9 @@ NS_ENUM(NSInteger,CellState){
     return self;
 }
 - (void)viewDidLoad {
-    [super viewDidLoad];
-     self.title = @"书架";
-    //self.navigationItem.title = @"书架";
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain
-                                                                  target:self action:@selector(editBookShelf:)];
+    [super viewDidLoad];   
+    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(editBookShelf:)];
+ 
     self.navigationItem.rightBarButtonItem = editButton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newBookDownloaded:) name: @"NewBookDownloaded" object:nil];
     // collectionView 布局

@@ -73,11 +73,12 @@
         [self.delegate menuViewFontSize:bottomMenu];
     }
 }
--(void)menuViewMark:(LSYTopMenuView *)topMenu
+-(Boolean)menuViewMark:(LSYTopMenuView *)topMenu
 {
     if ([self.delegate respondsToSelector:@selector(menuViewMark:)]) {
-        [self.delegate menuViewMark:topMenu];
+        return [self.delegate menuViewMark:topMenu];
     }
+    return NO;
 }
 #pragma mark -
 -(void)hiddenSelf

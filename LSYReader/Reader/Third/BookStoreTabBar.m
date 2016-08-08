@@ -29,6 +29,7 @@ static  NSString* bookIDContinueStr;
 - (id) initBookStore{
     if(self = [super init]){
         self.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"书城" image:nil tag:2];
+        self.title = @"书城";
     }
     return self;
 }

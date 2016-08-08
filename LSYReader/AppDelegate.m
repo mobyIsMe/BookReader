@@ -16,21 +16,47 @@
 @end
 
 @implementation AppDelegate
-@synthesize navigationController = _navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     UITabBarController* tabBarControllers = [[UITabBarController alloc]init];
+    MainViewController* bookShelf = [[MainViewController alloc] init];
+    BookStoreTabBar* bookStore = [[BookStoreTabBar alloc] init];
+    AboutTabBar* about= [[AboutTabBar alloc] init];
+    _navigationControllerBookShelf = [[UINavigationController alloc]initWithRootViewController:bookShelf];
+    _navigationControllerBookStore = [[UINavigationController alloc]initWithRootViewController:bookStore];
+    _navigationControllerAbout= [[UINavigationController alloc]initWithRootViewController:about];
+    bookShelf.title = @"书架";
+    bookStore.title = @"书城";
+    //bookShelf.tabBarController.navigationController.navigationItem.title = @"书架";
+     about.title = @"关于";
+    UIColor* blueColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:blueColor forKey:UITextAttributeTextColor];
+//    bookShelf.tabBarController.navigationController.navigationBar.titleTextAttributes = dict;
+//     bookShelf.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemBookmarks tag:1];
+    //bookShelf.tabBarItem.title=@"shujia";
+   
+    bookShelf.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"书架" image:nil tag:1];
     
-    _navigationController = [[UINavigationController alloc]initWithRootViewController:[[MainViewController alloc] init]];
+    bookShelf.tabBarItem.image = [UIImage imageNamed:@"Documents"];
+    //设置选中图片
+   // bookShelf.tabBarItem.selectedImage = [UIImage imageNamed:@"tabbar_mainframeHL"];
     
-    BookStoreTabBar* bookStore = [[BookStoreTabBar alloc]initBookStore];
-    AboutTabBar* about = [[AboutTabBar alloc]initAbout];
-    tabBarControllers.viewControllers = @[_navigationController,bookStore,about];
+    bookStore.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"书城" image:nil tag:2];
+    about.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"关于" image:nil tag:3];
+
+
+tabBarControllers.viewControllers = @[_navigationControllerBookShelf,_navigationControllerBookStore,_navigationControllerAbout];
     self.window.rootViewController = tabBarControllers;
-    //self.window.rootViewController = _navigationController;
+
+    for(UIViewController* viewControllerItem in  tabBarControllers.viewControllers)
+        
+    {
+        [viewControllerItem.tabBarController.navigationController.navigationBar setTitleTextAttributes: dict];//顶部title的颜色无效
+        [viewControllerItem.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica" size:15.0], NSFontAttributeName, nil]forState:UIControlStateNormal];
+    }
     
     [self.window makeKeyAndVisible];
     return YES;

@@ -28,4 +28,17 @@
     }
     return self;
 }
+
+- (BOOL)isEqual:(id)object {
+    
+    return self.recordModel.page == ((LSYMarkModel*)object).recordModel.page&& self.recordModel.chapter == ((LSYMarkModel*)object).recordModel.chapter;
+    
+}
+
+- (NSUInteger)hash
+{
+
+    return self.recordModel.page*31+self.recordModel.chapter;
+}
+
 @end

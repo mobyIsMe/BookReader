@@ -181,19 +181,19 @@
 
 -(void)changeMsg:(UISlider *)sender
 {
-    if([_readModel.chapterModel.content isEqualToString:@""]){
+    //if([_readModel.chapterModel.content isEqualToString:@""]){
         NSUInteger chapterValue =ceil((_readModel.chapterCount-1)*(sender.value)/100);
         if ([self.delegate respondsToSelector:@selector(menuViewJumpChapter:page:)]) {
             [self.delegate menuViewJumpChapter:chapterValue page:0];
         }
 
-    }else{
-        NSUInteger page =ceil((_readModel.chapterModel.pageCount-1)*sender.value/100.00);
-        if ([self.delegate respondsToSelector:@selector(menuViewJumpChapter:page:)]) {
-            [self.delegate menuViewJumpChapter:_readModel.chapter page:page];
-        }
-    }
-    
+//    }else{
+//        NSUInteger page =ceil((_readModel.chapterModel.pageCount-1)*sender.value/100.00);
+//        if ([self.delegate respondsToSelector:@selector(menuViewJumpChapter:page:)]) {
+//            [self.delegate menuViewJumpChapter:_readModel.chapter page:page];
+//        }
+//    }
+//    
     
     
 }
@@ -202,11 +202,11 @@
     
     if ([keyPath isEqualToString:@"readModel.chapter"] || [keyPath isEqualToString:@"readModel.page"]) {
        
-        if([_readModel.chapterModel.content isEqualToString:@""]){
+        //if([_readModel.chapterModel.content isEqualToString:@""]){
             _slider.value = _readModel.chapter/((float)(_readModel.chapterCount-1))*100;
-        }else{
-            _slider.value = _readModel.page/((float)(_readModel.chapterModel.pageCount-1))*100;
-        }
+//        }else{
+//            _slider.value = _readModel.page/((float)(_readModel.chapterModel.pageCount-1))*100;
+//        }
         [_progressView title:_readModel.chapterModel.title progress:[NSString stringWithFormat:@"%.1f%%",_slider.value]];
 
     }
