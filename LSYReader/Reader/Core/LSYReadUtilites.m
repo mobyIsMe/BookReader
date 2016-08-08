@@ -127,6 +127,14 @@
     if (!content) {
         content = [NSString stringWithContentsOfURL:url encoding:0x80000631 error:nil];
     }
+    if(!content){//对于汉字编码的 用gb18030编码
+        unsigned long encode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+        NSError *err;
+        NSString *str=[NSString stringWithContentsOfFile:url encoding:CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000) error:&err];
+
+        content = str;
+        
+    }
     if (!content) {
         return @"";
     }

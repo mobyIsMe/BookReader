@@ -251,6 +251,7 @@ NS_ENUM(NSInteger,CellState){
     LSYReadPageViewController *pageView = [[LSYReadPageViewController alloc] init];
     //pageView.resourceURL = [NSURL URLWithString:bookModel.filePath];    //文件位置
     pageView.resourceURL = [NSURL URLWithString:[bookModel.filePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];    //文件位置
+    
     if(bookModel.bookType!=BookTypePDF){
         pageView.isPDF = NO;
     }else{
